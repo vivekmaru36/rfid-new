@@ -55,9 +55,15 @@ function App() {
         <Route path="/register" element={<RegisterLayout />}>
           <Route path="reg_teacher" element={<TeacherForm />} />
           <Route path="reg_student" element={<StudentForm />} />
+          {/* <Route path="otp" element={< Otp/>} />
+          <Route path="Verfied" element={<Verified />} /> */}
         </Route>
-        <Route path="Verfied" element={<Verified />} />
-        <Route path="otp" element={< Otp/>} />
+        <Route path="Verfieds" element={<Verified />} />
+        <Route path="otps" element={< Otp/>} />
+
+        <Route path="otpt" element={< Otp/>} />
+        <Route path="Verfiedt" element={<Verified />} />
+        
         <Route
           path="/dash"
           element={<Layout />}

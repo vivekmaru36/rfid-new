@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
-import { FaUniversity } from "react-icons/fa";
+// import { FaUniversity } from "react-icons/fa";
 import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
 import CircleDesign from "../Layouts/CircleDesign";
 import ErrorStrip from "../ErrorStrip";
@@ -10,7 +10,7 @@ import ErrorStrip from "../ErrorStrip";
 const Login = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
-  const [username, setUsername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
   const [error, setError] = useState("");
@@ -38,7 +38,7 @@ const Login = () => {
       slowLoadingIndicator();
       try {
         const response = await axios.post("/auth/login/" + userType, {
-          username,
+          email,
           password,
         });
         await setUser({ ...response.data, userType });
@@ -72,12 +72,7 @@ const Login = () => {
           )}
           <CircleDesign />
           <section className="z-0 mb-4 flex items-center gap-2 whitespace-nowrap text-6xl md:text-8xl lg:gap-4">
-            <FaUniversity />
-            <h1 className="font-spectral font-semibold  text-slate-900  dark:text-slate-300 ">
-              K
-              <span className="inline-block h-10 w-10 rounded-full bg-violet-900 dark:bg-violet-600 md:h-14 md:w-14 xl:h-14 xl:w-14"></span>
-              llege
-            </h1>
+          
           </section>
           <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-80 hover:opacity-100 focus:opacity-100  dark:bg-[#060913] sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)] ">
             <form
@@ -121,21 +116,22 @@ const Login = () => {
                   ) : userType === "teacher" ? (
                     <PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                   ) : (
-                    <FaUniversity className="animate-fadeIn rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+                    // <FaUniversity className="animate-fadeIn rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+                    <p style={{ fontSize: '20px' }}>Select User Type</p>
                   )}
                 </div>
               </section>
               <section className="rounded-b-lg px-4 pb-4 dark:border-x-[1.5px] dark:border-b-[1.5px] dark:border-solid dark:border-violet-900">
                 <input
                   className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400"
-                  placeholder="username"
+                  placeholder="Email"
                   id="username"
-                  type="text"
+                  type="email"
                   required
                   autoComplete="off"
-                  name="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  name="email"
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
                 />
                 <input
                   className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400"

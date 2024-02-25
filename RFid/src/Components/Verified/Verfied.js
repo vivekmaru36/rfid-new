@@ -21,7 +21,7 @@ export default function Verified() {
             />
             <button
                 type="button"
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/register')}
                 className="btn btn-dark w-100 text-center"
             >
                 Go to Profile

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { FaUniversity } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import UserContext from "../../Hooks/UserContext";
@@ -19,11 +18,9 @@ const Header = () => {
         to="/dash"
         className="ml-4 flex items-center gap-2 px-3 py-1 text-2xl font-semibold sm:text-3xl"
       >
-        <FaUniversity className="m-1" />
+        {/* <FaUniversity className="m-1" /> */}
         <h1 className="m-0 pr-1 font-spectral text-slate-50 decoration-violet-500 decoration-[3px] underline-offset-[3px] hover:underline">
-          K
-          <span className="inline-block h-4 w-4 rounded-full bg-violet-500 dark:bg-violet-500 sm:h-[1.15rem] sm:w-[1.15rem]"></span>
-          llege
+          Rfid 
         </h1>
       </Link>
       <Link

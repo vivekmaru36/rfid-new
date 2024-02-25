@@ -1,25 +1,69 @@
 import React, { useState } from 'react';
 import OtpInput from 'react-otp-input';
 import './otp.css';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
-import UserContext from "../../Hooks/UserContext";
+// import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
+// import { useContext, useEffect } from 'react';
 
-
+import { useLocation } from 'react-router-dom';
 
 
 export default function Otp() {
   const [otp, setOtp] = useState('');
   const [buttonText, setButtonText] = useState('Submit');
   const [status, setStatus] = useState({});
-  const [error,setError] = useState("");
-  const { user } = React.useContext(UserContext);
+  const [error, setError] = useState("");
 
-  console.log(user);
+  // Accessing student data from location state
+  const location = useLocation();
+  const { student } = location.state;
+
+  console.log(student)
 
   const navigate = useNavigate();
 
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // Set button text to "Sending..."
+  //   setButtonText('Sending...');
+
+  //   // const token = Cookies.get("token");
+  //   setError("Error");
+
+  //   try {
+  //     const reqData = JSON.stringify(otp);
+  //     const reqData2 = JSON.stringify(student.rfid);
+  //     let result = await axios.post("/otp", reqData, reqData2);
+
+  //     if (result.success) {
+  //       console.log(result.token);
+
+  //       setStatus({
+  //         success: true,
+  //         message: 'Data sent successfully',
+  //       });
+
+  //       navigate("/Verfieds");
+
+  //     }
+  //     else {
+  //       setStatus({
+  //         success: false,
+  //         message: result.message,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error('Error: ', error);
+  //   }
+  //   finally{
+  //     // Reset button text to "Submit" after the request is complete
+  //     setButtonText('Submit');
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,15 +71,42 @@ export default function Otp() {
     // Set button text to "Sending..."
     setButtonText('Sending...');
 
-    const token = Cookies.get("token");
-    setError("Error");
+    // const token = Cookies.get("token");
+    setError("");
 
     try {
-      const reqData = JSON.stringify(otp);
-      const reqData2 = JSON.stringify(user.id);
-      const response = await axios.post("student", reqData,reqData2);
+      const requestData = {
+        otp: otp,
+        rfid: student.rfid
+      };
+
+      // Send combined data object in the request
+      let result = await axios.post("/otp", requestData);
+
+      if (result.data.success) {
+        console.log(result.data.token);
+
+        setStatus({
+          success: true,
+          message: 'Data sent successfully',
+        });
+
+        navigate("/Verified");
+      } else {
+        setStatus({
+          success: false,
+          message: result.data.message,
+        });
+      }
     } catch (error) {
-      
+      console.error('Error: ', error);
+      setStatus({
+        success: false,
+        message: 'Error occurred while sending data',
+      });
+    } finally {
+      // Reset button text to "Submit" after the request is complete
+      setButtonText('Submit');
     }
   };
 
@@ -72,7 +143,7 @@ export default function Otp() {
 
           {
             status.message &&
-            <p style={{textAlign:"center",fontSize:"30px"}}className={status.success === false ? "danger" : "success"}>{status.message}</p>
+            <p style={{ textAlign: "center", fontSize: "30px" }} className={status.success === false ? "danger" : "success"}>{status.message}</p>
           }
         </form>
       </div>
