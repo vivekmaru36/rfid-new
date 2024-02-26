@@ -20,77 +20,31 @@ export default function Otp() {
   const location = useLocation();
   const { student } = location.state;
 
-  console.log(student)
+  // console.log(student)
 
   const navigate = useNavigate();
 
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   // Set button text to "Sending..."
-  //   setButtonText('Sending...');
-
-  //   // const token = Cookies.get("token");
-  //   setError("Error");
-
-  //   try {
-  //     const reqData = JSON.stringify(otp);
-  //     const reqData2 = JSON.stringify(student.rfid);
-  //     let result = await axios.post("/otp", reqData, reqData2);
-
-  //     if (result.success) {
-  //       console.log(result.token);
-
-  //       setStatus({
-  //         success: true,
-  //         message: 'Data sent successfully',
-  //       });
-
-  //       navigate("/Verfieds");
-
-  //     }
-  //     else {
-  //       setStatus({
-  //         success: false,
-  //         message: result.message,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error('Error: ', error);
-  //   }
-  //   finally{
-  //     // Reset button text to "Submit" after the request is complete
-  //     setButtonText('Submit');
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Set button text to "Sending..."
+  
     setButtonText('Sending...');
-
-    // const token = Cookies.get("token");
     setError("");
-
+  
     try {
       const requestData = {
         otp: otp,
         rfid: student.rfid
       };
-
-      // Send combined data object in the request
-      let result = await axios.post("/otp", requestData);
-
+      const request=JSON.stringify(requestData);
+  
+      let result = await axios.post("/otp", request);
+  
       if (result.data.success) {
-        console.log(result.data.token);
-
         setStatus({
           success: true,
           message: 'Data sent successfully',
         });
-
+  
         navigate("/Verified");
       } else {
         setStatus({
@@ -99,16 +53,16 @@ export default function Otp() {
         });
       }
     } catch (error) {
-      console.error('Error: ', error);
+      console.error('Error: ', error.response.data);
       setStatus({
         success: false,
-        message: 'Error occurred while sending data',
+        message: error.response.data.message || 'Error occurred while sending data',
       });
     } finally {
-      // Reset button text to "Submit" after the request is complete
       setButtonText('Submit');
     }
-  };
+  };  
+  
 
   return (
     <div className="container-otp">
