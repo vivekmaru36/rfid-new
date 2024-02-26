@@ -12,6 +12,7 @@ import axios from "../../config/api/axios";
 
 const Dash = () => {
   const { user, setPaperList } = useContext(UserContext);
+  console.log("This is dahs",user);
 
   useEffect(() => {
     const getPapers = async () => {
@@ -29,7 +30,7 @@ const Dash = () => {
       <div className="grid grid-cols-1 place-content-center gap-3 px-1 py-4 lg:grid-cols-2 lg:gap-4 lg:px-8 xl:grid-cols-3">
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
-          to={"./paper"}
+          to={"./lec"}
         >
           <GiBookshelf className="text-[2.5rem] lg:text-[4rem] " />
           <div className="font-semibold">
@@ -75,6 +76,19 @@ const Dash = () => {
             Time Schedule
             <p className="text-sm font-normal lg:text-base ">
               View or Edit Time Schedule
+            </p>
+          </div>
+        </Link>
+
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./recentrecords"}
+        >
+          <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            Time Schedule
+            <p className="text-sm font-normal lg:text-base ">
+              Recent Records
             </p>
           </div>
         </Link>

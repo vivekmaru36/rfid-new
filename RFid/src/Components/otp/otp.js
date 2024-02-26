@@ -32,7 +32,7 @@ export default function Otp() {
   
     try {
       const requestData = {
-        otp: otp,
+        otp: +otp,
         rfid: student.rfid
       };
       const request=JSON.stringify(requestData);

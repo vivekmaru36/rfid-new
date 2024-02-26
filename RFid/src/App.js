@@ -70,8 +70,12 @@ function App() {
           errorElement={<ErrorElement />}
         >
           <Route index element={<Dash />} />
+          {/* <Route path="/" element={<Dash />} /> */}
+          <Route path="recentrecords" element={<Profile />} />
           <Route path="otp" element={< Otp/>} />
-          <Route path="paper" element={<Paper />} />
+          {/* <Route path="/dash/farhan" element={< Otp/>} /> */}
+          {/* <Route path="paper" element={<Paper />} /> */}
+          <Route path="lec" element={<Paper />} />
           <Route path="paper/:paper" element={<Notes />} />
           <Route path="paper/:paper/add" element={<NotesForm />} />
           <Route path="paper/:paper/:note/edit" element={<NotesForm />} />

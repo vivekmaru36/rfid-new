@@ -17,7 +17,7 @@ const Nav = () => {
       className="z-0 hidden h-full flex-col justify-stretch bg-slate-950 px-4 py-4 text-slate-100 dark:bg-gradient-to-b dark:from-slate-950 dark:from-65% dark:to-violet-950/60 dark:to-95% lg:flex "
     >
       <ul className="m-auto flex flex-grow flex-col items-center justify-start gap-[6px]">
-        <NavLink to={"./paper"} className="w-full font-medium">
+        <NavLink to={"./lec"} className="w-full font-medium">
           <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
             <GiBookshelf className="pt-[0.1rem] text-2xl  " />
             LecDetails
@@ -41,6 +41,7 @@ const Nav = () => {
             Time Schedule
           </li>
         </NavLink>
+        
         {user.role === "HOD" && (
           <>
             <NavLink to={"./add_paper"} className="w-full font-medium">
