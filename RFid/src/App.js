@@ -38,6 +38,7 @@ import TimeScheduleForm from "./Components/Forms/TimeScheduleForm";
 import Login from "./Components/Forms/Login";
 import Verified from "./Components/Verified/Verfied";
 import Otp from "./Components/otp/otp";
+import Otpt from "./Components/otp/otpt";
 
 // lazy loading user specific components
 const TeacherApproval = lazy(() =>
@@ -58,8 +59,9 @@ function App() {
           {/* <Route path="otp" element={< Otp/>} />
           <Route path="Verfied" element={<Verified />} /> */}
         </Route>
-        <Route path="Verfied" element={<Verified />} />
+        {/* <Route path="Verfied" element={<Verified />} /> */}
         <Route path="otp" element={< Otp/>} />
+        <Route path="otpt" element={< Otpt/>} />
         
         <Route
           path="/dash"

@@ -32,7 +32,8 @@ const TeacherForm = () => {
       const reqData = JSON.stringify(teacher);
       // const response = await axios.post("teacher/123", reqData);
       const response = await axios.post("Teacher", reqData);
-      navigate("../");
+      // navigate("../");
+      navigate("/otpt",{ state: { teacher: teacher } });
       toast.success(response.data.message);
     } catch (err) {
       setError(err);
