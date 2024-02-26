@@ -39,6 +39,7 @@ import Login from "./Components/Forms/Login";
 import Verified from "./Components/Verified/Verfied";
 import Otp from "./Components/otp/otp";
 import Otpt from "./Components/otp/otpt";
+import Lecture from "./Components/Queries/Lecture";
 
 // lazy loading user specific components
 const TeacherApproval = lazy(() =>
@@ -74,7 +75,8 @@ function App() {
           <Route path="otp" element={< Otp/>} />
           {/* <Route path="/dash/farhan" element={< Otp/>} /> */}
           {/* <Route path="paper" element={<Paper />} /> */}
-          <Route path="lec" element={<Paper />} />
+          {/* <Route path="lec" element={<Paper />} /> */}
+          <Route path="lec" element={<Lecture />} />
           <Route path="paper/:paper" element={<Notes />} />
           <Route path="paper/:paper/add" element={<NotesForm />} />
           <Route path="paper/:paper/:note/edit" element={<NotesForm />} />
