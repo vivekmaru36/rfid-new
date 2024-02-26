@@ -21,10 +21,10 @@ export default function Verified() {
             />
             <button
                 type="button"
-                onClick={() => navigate('/register')}
+                onClick={() => navigate('/')}
                 className="btn btn-dark w-100 text-center"
             >
-                Go to Profile
+                Go to Login
             </button>
         </div>
     );

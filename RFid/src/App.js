@@ -58,11 +58,8 @@ function App() {
           {/* <Route path="otp" element={< Otp/>} />
           <Route path="Verfied" element={<Verified />} /> */}
         </Route>
-        <Route path="Verfieds" element={<Verified />} />
-        <Route path="otps" element={< Otp/>} />
-
-        <Route path="otpt" element={< Otp/>} />
-        <Route path="Verfiedt" element={<Verified />} />
+        <Route path="Verfied" element={<Verified />} />
+        <Route path="otp" element={< Otp/>} />
         
         <Route
           path="/dash"

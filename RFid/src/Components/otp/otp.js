@@ -9,6 +9,8 @@ import axios from "../../config/api/axios";
 
 import { useLocation } from 'react-router-dom';
 
+import { toast } from "react-toastify";
+
 
 export default function Otp() {
   const [otp, setOtp] = useState('');
@@ -26,26 +28,27 @@ export default function Otp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     setButtonText('Sending...');
     setError("");
-  
+
     try {
       const requestData = {
         otp: +otp,
         rfid: student.rfid
       };
-      const request=JSON.stringify(requestData);
-  
+      const request = JSON.stringify(requestData);
+
       let result = await axios.post("/otp", request);
-  
+
       if (result.data.success) {
         setStatus({
           success: true,
           message: 'Data sent successfully',
         });
-  
-        navigate("/Verified");
+
+        navigate("/");
+        toast.success(result.data.message);
       } else {
         setStatus({
           success: false,
@@ -61,8 +64,8 @@ export default function Otp() {
     } finally {
       setButtonText('Submit');
     }
-  };  
-  
+  };
+
 
   return (
     <div className="container-otp">
