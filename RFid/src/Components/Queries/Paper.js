@@ -34,7 +34,7 @@ const Paper = () => {
   const [LecDetails, setLecDetails] = useState({
     Teacher: "",
     course: "",
-    rfid: "",
+    rfidno: "",
     Subject: "",
     LectureStartTime: "",
     LectureEndTime: "",
@@ -113,6 +113,22 @@ const Paper = () => {
 
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete("http://localhost:3500/Hardware", {
+        data: {
+          rfid: user.rfid
+        },
+      });
+
+      console.log("Lecture deleted successfully:", response.data);
+      alert("Lec Deleted Succesfully");
+    } catch (error) {
+      console.error("Error deleting lecture:", error);
+      alert("No Lec Set To Delete");
+    }
+  };
+
   console.log("user info rfid ", user.rfid);
 
   if (user.role === 'teacher') {
@@ -186,9 +202,6 @@ const Paper = () => {
           <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Submit
           </button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Delete
-          </button>
         </form>
       );
     } else if (user.rfid === LecDetails.rfidno) {
@@ -223,7 +236,7 @@ const Paper = () => {
               </tr>
             </tbody>
           </table>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button onClick={handleDelete} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Delete
           </button>
         </div>
