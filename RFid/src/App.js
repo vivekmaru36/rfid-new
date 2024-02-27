@@ -40,6 +40,7 @@ import Verified from "./Components/Verified/Verfied";
 import Otp from "./Components/otp/otp";
 import Otpt from "./Components/otp/otpt";
 import Lecture from "./Components/Queries/Lecture";
+import HardwareRoom from "./Rooms/HardwareRoom";
 
 // lazy loading user specific components
 const TeacherApproval = lazy(() =>
@@ -58,11 +59,14 @@ function App() {
           <Route path="reg_teacher" element={<TeacherForm />} />
           <Route path="reg_student" element={<StudentForm />} />
           {/* <Route path="otp" element={< Otp/>} />
-          <Route path="Verfied" element={<Verified />} /> */}
+          // <Route path="Verfied" element={<Verified />} /> */}
         </Route>
         {/* <Route path="Verfied" element={<Verified />} /> */}
         <Route path="otp" element={< Otp/>} />
         <Route path="otpt" element={< Otpt/>} />
+
+        {/* Route for Hardware Room */}
+        <Route path="HardwareRoom" element={<HardwareRoom/>} />
         
         <Route
           path="/dash"
