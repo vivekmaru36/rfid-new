@@ -41,6 +41,7 @@ import Otp from "./Components/otp/otp";
 import Otpt from "./Components/otp/otpt";
 import Lecture from "./Components/Queries/Lecture";
 import HardwareRoom from "./Rooms/HardwareRoom";
+import RecentRecords from "./Components/Layouts/RecentRecords";
 
 // lazy loading user specific components
 const TeacherApproval = lazy(() =>
@@ -75,7 +76,7 @@ function App() {
         >
           <Route index element={<Dash />} />
           {/* <Route path="/" element={<Dash />} /> */}
-          <Route path="recentrecords" element={<Profile />} />
+          {/* <Route path="recentrecords" element={<Profile />} /> */}
           <Route path="otp" element={< Otp/>} />
           {/* <Route path="/dash/farhan" element={< Otp/>} /> */}
           {/* <Route path="paper" element={<Paper />} /> */}
@@ -87,6 +88,7 @@ function App() {
           <Route path="paper/:paper/students" element={<StudentsList />} />
           <Route path="attendance" element={<AttendanceLayout />} />
           <Route path="internal" element={<InternalLayout />} />
+          <Route path="RecentRecords" element={<RecentRecords />} />
           <Route path="time_schedule" element={<TimeScheduleForm />} />
           <Route path="profile" element={<Profile />} />
           <Route

@@ -9,10 +9,11 @@ import { PiBooks, PiUser, PiStudent } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
+import { FaHistory } from "react-icons/fa";
 
 const Dash = () => {
   const { user, setPaperList } = useContext(UserContext);
-  console.log("This is dahs",user);
+  // console.log("This is dahs",user);
 
   useEffect(() => {
     const getPapers = async () => {
@@ -56,16 +57,17 @@ const Dash = () => {
 
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
-          to={"./internal"}
+          to={"./RecentRecords"}
         >
-          <HiOutlineDocumentReport className="text-[2.5rem] lg:text-[4rem] " />
+          <FaHistory className="text-[2.5rem] lg:text-[4rem] " />
           <div className="font-semibold">
-            Internal Mark
+            RecentRecords
             <p className="text-sm font-normal lg:text-base ">
-              View or Edit Internal Marks
+              Last Location For Rfid Swipe
             </p>
           </div>
         </Link>
+
 
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
@@ -80,7 +82,7 @@ const Dash = () => {
           </div>
         </Link>
 
-        <Link
+        {/* <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./recentrecords"}
         >
@@ -91,38 +93,24 @@ const Dash = () => {
               Recent Records
             </p>
           </div>
-        </Link>
+        </Link> */}
 
-        {user.role === "HOD" && (
-          <>
-            <Link
-              className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
-              to={"./add_paper"}
-            >
-              <BiBookAdd className="text-[2.5rem] lg:text-[4rem] " />
-              <div className="font-semibold">
-                Add Paper
-                <p className="text-sm font-normal lg:text-base ">
-                  Add a New Paper
-                </p>
-              </div>
-            </Link>
-
-            <Link
-              className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
-              to={"./approve_teacher"}
-            >
-              <RiUserAddLine className="text-[2.5rem] lg:text-[4rem] " />
-              <div className="font-semibold">
-                Approve Teacher
-                <p className="text-sm font-normal lg:text-base ">
-                  Approve registered teacher(s)
-                </p>
-              </div>
-            </Link>
-          </>
-        )}
         {user.role === "student" && (
+          <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./Attendace_Summary"}
+          >
+            <PiBooks className="text-[2.5rem] lg:text-[4rem] " />
+            <div className="font-semibold">
+              Attendance Summary
+              <p className="text-sm font-normal lg:text-base ">
+              </p>
+            </div>
+          </Link>
+        )}
+
+        {/* Teacher Role Based Dash */}
+        {user.role === "teacher" && (
           <Link
             className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
             to={"./join_paper"}

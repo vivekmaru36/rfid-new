@@ -18,7 +18,7 @@ const Header = () => {
         to="/dash"
         className="ml-4 flex items-center gap-2 px-3 py-1 text-2xl font-semibold sm:text-3xl"
       >
-        {/* <FaUniversity className="m-1" /> */}
+        
         <h1 className="m-0 pr-1 font-spectral text-slate-50 decoration-violet-500 decoration-[3px] underline-offset-[3px] hover:underline">
           Rfid 
         </h1>
