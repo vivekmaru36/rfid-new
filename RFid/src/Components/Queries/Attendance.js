@@ -8,6 +8,7 @@ import ErrorStrip from "../ErrorStrip";
 
 const Attendance = () => {
   const { paperList } = useContext(UserContext);
+  const { SubjectList } = useContext(UserContext);
   const [attendance, setAttendance] = useState([]);
   const [paper, setPaper] = useState("");
   const [date, setDate] = useState("");
@@ -120,7 +121,7 @@ const Attendance = () => {
         <form className="w-full gap-4 accent-violet-900 md:flex ">
           <div className="flex w-full flex-col">
             <label className="m-1" htmlFor="paper">
-              Select Paper
+              Select Subject
             </label>
             <select
               className="mb-4 block h-10  rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400 "
@@ -137,6 +138,10 @@ const Attendance = () => {
                 <option key={index} value={paper._id}>
                   {paper.paper}
                 </option>
+                // {paperList.map((paper, index) => (
+                //   <option key={index} value={paper._id}>
+                //     {paper.paper}
+                //   </option>
               ))}
             </select>
           </div>

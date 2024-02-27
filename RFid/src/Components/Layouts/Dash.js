@@ -23,6 +23,208 @@ const Dash = () => {
     getPapers();
   }, [setPaperList, user]);
 
+  if (user.role === "teacher") {
+    return (
+      <main className="self-center">
+        <h2 className="m-6 mx-auto text-center text-6xl font-bold dark:text-slate-400">
+          Dashboard
+        </h2>
+        <div className="grid grid-cols-1 place-content-center gap-3 px-1 py-4 lg:grid-cols-2 lg:gap-4 lg:px-8 xl:grid-cols-3">
+          <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./lec"}
+          >
+            <GiBookshelf className="text-[2.5rem] lg:text-[4rem] " />
+            <div className="font-semibold">
+              LecDetails
+              <p className="text-sm font-normal lg:text-base ">
+                View Lec
+              </p>
+            </div>
+          </Link>
+
+          <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./attendance"}
+          >
+            <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+            <div className="font-semibold">
+              Attendance
+              <p className="text-sm font-normal lg:text-base ">
+                Add or Edit Attendance
+              </p>
+            </div>
+          </Link>
+
+          <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./RecentRecords"}
+          >
+            <FaHistory className="text-[2.5rem] lg:text-[4rem] " />
+            <div className="font-semibold">
+              RecentRecords
+              <p className="text-sm font-normal lg:text-base ">
+                Last Location For Rfid Swipe
+              </p>
+            </div>
+          </Link>
+
+
+          <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./time_schedule"}
+          >
+            <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
+            <div className="font-semibold">
+              Time Schedule
+              <p className="text-sm font-normal lg:text-base ">
+                View or Edit Time Schedule
+              </p>
+            </div>
+          </Link>
+
+          {/* <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./recentrecords"}
+        >
+          <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            Time Schedule
+            <p className="text-sm font-normal lg:text-base ">
+              Recent Records
+            </p>
+          </div>
+        </Link> */}
+
+          <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./profile"}
+          >
+            <PiUser className="text-[2.5rem] lg:text-[4rem] " />
+            <div className="font-semibold">
+              Profile
+              <p className="text-sm font-normal lg:text-base ">
+                View Profile
+              </p>
+            </div>
+          </Link>
+          <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./Lectures_History"}
+          >
+            <PiBooks className="text-[2.5rem] lg:text-[4rem] " />
+            <div className="font-semibold">
+              Lectures History
+              <p className="text-sm font-normal lg:text-base ">
+                All Lectures History
+              </p>
+            </div>
+          </Link>
+        </div>
+      </main>
+    );
+  } else if (user.role === "student") {
+    <main className="self-center">
+      <h2 className="m-6 mx-auto text-center text-6xl font-bold dark:text-slate-400">
+        Dashboard
+      </h2>
+      <div className="grid grid-cols-1 place-content-center gap-3 px-1 py-4 lg:grid-cols-2 lg:gap-4 lg:px-8 xl:grid-cols-3">
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./lec"}
+        >
+          <GiBookshelf className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            LecDetails
+            <p className="text-sm font-normal lg:text-base ">
+              View Lec
+            </p>
+          </div>
+        </Link>
+
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./attendance"}
+        >
+          <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            Attendance
+            <p className="text-sm font-normal lg:text-base ">
+              Add or Edit Attendance
+            </p>
+          </div>
+        </Link>
+
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./RecentRecords"}
+        >
+          <FaHistory className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            RecentRecords
+            <p className="text-sm font-normal lg:text-base ">
+              Last Location For Rfid Swipe
+            </p>
+          </div>
+        </Link>
+
+        {/* <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./recentrecords"}
+        >
+          <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            Time Schedule
+            <p className="text-sm font-normal lg:text-base ">
+              Recent Records
+            </p>
+          </div>
+        </Link> */}
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./profile"}
+        >
+          <PiStudent className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            Profile
+            <p className="text-sm font-normal lg:text-base ">
+              View or Edit Profile
+            </p>
+          </div>
+        </Link>
+        <Link
+            className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+            to={"./Attendace_Summary"}
+          >
+            <PiBooks className="text-[2.5rem] lg:text-[4rem] " />
+            <div className="font-semibold">
+              Attendance Summary
+              <p className="text-sm font-normal lg:text-base ">
+              </p>
+            </div>
+          </Link>
+      </div>
+    </main>
+  }
+
+
+
+
+
+
+
+
+  // the big gap
+
+
+
+
+
+
+
+
+
+
   return (
     <main className="self-center">
       <h2 className="m-6 mx-auto text-center text-6xl font-bold dark:text-slate-400">
@@ -95,7 +297,7 @@ const Dash = () => {
           </div>
         </Link> */}
 
-        {user.role === "student" && (
+        {/* {user.role === "student" && (
           <Link
             className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
             to={"./Attendace_Summary"}
@@ -107,23 +309,23 @@ const Dash = () => {
               </p>
             </div>
           </Link>
-        )}
+        )} */}
 
         {/* Teacher Role Based Dash */}
-        {user.role === "teacher" && (
+        {/* {user.role === "teacher" && (
           <Link
             className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
-            to={"./join_paper"}
+            to={"./Lectures_History"}
           >
             <PiBooks className="text-[2.5rem] lg:text-[4rem] " />
             <div className="font-semibold">
-              Manage Paper
+              Lectures History
               <p className="text-sm font-normal lg:text-base ">
-                Join or Leave Paper
+                All Lectures History
               </p>
             </div>
           </Link>
-        )}
+        )} */}
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./profile"}

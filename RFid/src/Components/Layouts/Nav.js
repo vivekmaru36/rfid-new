@@ -37,23 +37,27 @@ const Nav = () => {
             Time Schedule
           </li>
         </NavLink>
+        <NavLink to={"./RecentRecords"} className="w-full font-medium">
+          <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
+            <FaHistory className="pt-[0.1rem] text-2xl  " />
+            Recent Records
+          </li>
+        </NavLink>
+
         {user.role === "teacher" && (
-          <NavLink to={"./RecentRecords"} className="w-full font-medium">
+          <NavLink to={"./Lectures_History"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
-              <FaHistory className="pt-[0.1rem] text-2xl  " />
-              Recent Records
+              <PiBooks className="pt-[0.1rem] text-2xl  " />
+              All Lectures History
             </li>
           </NavLink>
+
         )}
-        {user.role === "student" && (
-          <NavLink to={"./RecentRecords"} className="w-full font-medium">
-            <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
-              <FaHistory className="pt-[0.1rem] text-2xl  " />
-              Recent Records
-            </li>
-          </NavLink>
-        )}
-        
+        {/* {user.role === "student" && (
+          
+          
+        )} */}
+
       </ul>
       <ul className="flex flex-grow flex-col items-start justify-end gap-[6px]">
         <NavLink to={"./profile"} className="w-full font-medium">

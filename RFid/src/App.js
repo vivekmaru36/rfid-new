@@ -87,6 +87,7 @@ function App() {
           <Route path="paper/:paper/:note/edit" element={<NotesForm />} />
           <Route path="paper/:paper/students" element={<StudentsList />} />
           <Route path="attendance" element={<AttendanceLayout />} />
+          <Route path="Lectures_History" element={<AttendanceLayout />} />
           <Route path="internal" element={<InternalLayout />} />
           <Route path="RecentRecords" element={<RecentRecords />} />
           <Route path="time_schedule" element={<TimeScheduleForm />} />
