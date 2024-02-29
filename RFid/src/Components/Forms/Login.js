@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
-// import { FaUniversity } from "react-icons/fa";
+
 import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
 import CircleDesign from "../Layouts/CircleDesign";
 import ErrorStrip from "../ErrorStrip";
@@ -116,7 +116,7 @@ const Login = () => {
                   ) : userType === "teacher" ? (
                     <PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                   ) : (
-                    // <FaUniversity className="animate-fadeIn rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+                    
                     <p style={{ fontSize: '20px' }}>Select User Type</p>
                   )}
                 </div>

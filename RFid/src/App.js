@@ -21,34 +21,26 @@ import Layout from "./Components/Layouts/Layout";
 import Dash from "./Components/Layouts/Dash";
 import ErrorElement from "./Components/Layouts/ErrorElement";
 import AttendanceLayout from "./Components/Layouts/AttendanceLayout";
-import InternalLayout from "./Components/Layouts/InternalLayout";
+
 import RegisterLayout from "./Components/Layouts/RegisterLayout";
 
 // queries
-import Paper from "./Components/Queries/Paper";
-import Notes from "./Components/Queries/Notes";
-import StudentsList from "./Components/Queries/StudentsList";
 import Profile from "./Components/Queries/Profile";
 
 // forms
 import TeacherForm from "./Components/Forms/TeacherForm";
 import StudentForm from "./Components/Forms/StudentForm";
-import NotesForm from "./Components/Forms/NotesForm";
+
 import TimeScheduleForm from "./Components/Forms/TimeScheduleForm";
 import Login from "./Components/Forms/Login";
-import Verified from "./Components/Verified/Verfied";
+
 import Otp from "./Components/otp/otp";
 import Otpt from "./Components/otp/otpt";
 import Lecture from "./Components/Queries/Lecture";
 import HardwareRoom from "./Rooms/HardwareRoom";
 import RecentRecords from "./Components/Layouts/RecentRecords";
 
-// lazy loading user specific components
-const TeacherApproval = lazy(() =>
-  import("./Components/Queries/TeacherApproval")
-);
-const PaperForm = lazy(() => import("./Components/Forms/PaperForm"));
-const JoinPaper = lazy(() => import("./Components/Forms/JoinPaper"));
+
 
 
 function App() {
@@ -75,47 +67,16 @@ function App() {
           errorElement={<ErrorElement />}
         >
           <Route index element={<Dash />} />
-          {/* <Route path="/" element={<Dash />} /> */}
-          {/* <Route path="recentrecords" element={<Profile />} /> */}
+          
           <Route path="otp" element={< Otp/>} />
-          {/* <Route path="/dash/farhan" element={< Otp/>} /> */}
-          {/* <Route path="paper" element={<Paper />} /> */}
-          {/* <Route path="lec" element={<Paper />} /> */}
+          
           <Route path="lec" element={<Lecture />} />
-          <Route path="paper/:paper" element={<Notes />} />
-          <Route path="paper/:paper/add" element={<NotesForm />} />
-          <Route path="paper/:paper/:note/edit" element={<NotesForm />} />
-          <Route path="paper/:paper/students" element={<StudentsList />} />
+          
           <Route path="attendance" element={<AttendanceLayout />} />
           <Route path="Lectures_History" element={<AttendanceLayout />} />
-          <Route path="internal" element={<InternalLayout />} />
           <Route path="RecentRecords" element={<RecentRecords />} />
           <Route path="time_schedule" element={<TimeScheduleForm />} />
           <Route path="profile" element={<Profile />} />
-          <Route
-            path="approve_teacher"
-            element={
-              <Suspense fallback={<Loading />}>
-                <TeacherApproval />
-              </Suspense>
-            }
-          />
-          <Route
-            path="add_paper"
-            element={
-              <Suspense fallback={<Loading />}>
-                <PaperForm />
-              </Suspense>
-            }
-          />
-          <Route
-            path="join_paper"
-            element={
-              <Suspense fallback={<Loading />}>
-                <JoinPaper />
-              </Suspense>
-            }
-          />
         </Route>
       </Route>
     )

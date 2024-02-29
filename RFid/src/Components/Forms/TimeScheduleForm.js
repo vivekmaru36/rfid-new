@@ -8,7 +8,7 @@ import Loading from "../Layouts/Loading";
 import ErrorStrip from "../ErrorStrip";
 
 const TimeScheduleForm = () => {
-  const { user, paperList } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [timeSchedule, setTimeSchedule] = useState({});
   const [disabled, setDisabled] = useState(true);
   const [id, setId] = useState("");
@@ -131,11 +131,11 @@ const TimeScheduleForm = () => {
                             onChange={(e) => handleFormChange(e)}
                           >
                             <option defaultValue>--</option>
-                            {paperList?.map((paper) => (
-                              <option key={paper._id} value={paper.name}>
-                                {paper.paper}
+                            
+                              <option key={1} value={"1"}>
+                                {1}
                               </option>
-                            ))}
+                            
                           </select>
                         </td>
                       ))}

@@ -1,9 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import axios from "../../config/api/axios";
 import UserContext from "../../Hooks/UserContext";
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { TableHeader } from "../Table";
+
 import ErrorStrip from "../ErrorStrip";
 import React from "react";
 
