@@ -5,10 +5,10 @@ import UserContext from "../../Hooks/UserContext";
 import { toast } from "react-toastify";
 
 const Header = () => {
-  const { setUser, setPaperList } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const logout = () => {
     setUser("");
-    setPaperList([]);
+    
     localStorage.clear();
     toast.info("Logged Out");
   };
