@@ -12,16 +12,10 @@ import axios from "../../config/api/axios";
 import { FaHistory } from "react-icons/fa";
 
 const Dash = () => {
-  const { user, setPaperList } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   // console.log("This is dahs",user);
 
-  useEffect(() => {
-    const getPapers = async () => {
-      const response = await axios.get(`paper/${user.userType}/${user._id}`);
-      setPaperList(response.data);
-    };
-    getPapers();
-  }, [setPaperList, user]);
+ 
 
   if (user.role === "teacher") {
     return (
@@ -51,7 +45,7 @@ const Dash = () => {
             <div className="font-semibold">
               Attendance
               <p className="text-sm font-normal lg:text-base ">
-                Add or Edit Attendance
+                
               </p>
             </div>
           </Link>
@@ -83,18 +77,7 @@ const Dash = () => {
             </div>
           </Link>
 
-          {/* <Link
-          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
-          to={"./recentrecords"}
-        >
-          <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
-          <div className="font-semibold">
-            Time Schedule
-            <p className="text-sm font-normal lg:text-base ">
-              Recent Records
-            </p>
-          </div>
-        </Link> */}
+          
 
           <Link
             className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
@@ -168,18 +151,7 @@ const Dash = () => {
           </div>
         </Link>
 
-        {/* <Link
-          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
-          to={"./recentrecords"}
-        >
-          <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
-          <div className="font-semibold">
-            Time Schedule
-            <p className="text-sm font-normal lg:text-base ">
-              Recent Records
-            </p>
-          </div>
-        </Link> */}
+        
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./profile"}
