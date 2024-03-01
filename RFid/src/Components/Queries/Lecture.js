@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 
 const Lecture = () => {
-    const { setPaper, paperList } = useContext(UserContext);
+    
     const { user } = React.useContext(UserContext);
     console.log(user.rfid);
 

@@ -14,7 +14,7 @@ const Attendance = () => {
   };
 
   return (
-    <div>Attendance</div>
+    <div>Attendance not real</div>
   );
 };
 export default Attendance;
