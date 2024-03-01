@@ -25,6 +25,9 @@ const Lecture = () => {
     // pick etime 
     const [endtime, setEndtime] = useState(starttime);
 
+    // current world time
+    const currentWorldTime = new Date();
+
     // Update minTime for endtime based on selected starttime
     const handleStarttimeChange = (date) => {
         setStarttime(date);
@@ -42,6 +45,21 @@ const Lecture = () => {
         LectureEndTime: "",
         Lecdate: ""
     });
+
+    // auto del api
+    const handleAutoDel = async () => {
+        try {
+            const response = await axios.delete("http://localhost:3500/Hardware/AutoDel", {
+                data: {
+                    etime: LecDetails.LectureEndTime,
+                },
+            });
+
+            console.log("Lecture Auto deleted successfully : ", response.data);
+        } catch (error) {
+            console.error("Error deleting lecture : ", error);
+        }
+    };
 
     useEffect(() => {
         const fetchHardware = async () => {
@@ -62,12 +80,12 @@ const Lecture = () => {
 
                     // Check if eTime has passed from the current time
 
-                    // const eTimeUTC = new Date(ldata.eTime);
+                    const eTimeUTC = new Date(ldata.eTime);
 
-                    // if (currentWorldTime > eTimeUTC) {
-                    //   // Call the delete API
-                    //   // handleAutoDelL();
-                    // }
+                    if (currentWorldTime > eTimeUTC) {
+                      // Call the delete API
+                      handleAutoDel();
+                    }
                 } else {
                     console.error('Error fetching Law details:', response.data.message);
                     setLecDetails(null);
