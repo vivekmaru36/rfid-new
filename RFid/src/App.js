@@ -66,9 +66,9 @@ function App() {
           element={<Layout />}
           errorElement={<ErrorElement />}
         >
-          <Route index element={<Dash />} />
+          <Route index eleent={<Dash />} />
           
-          <Route path="otp" element={< Otp/>} />
+          <Route path="otp" element={< Otp/>} m/>
           
           <Route path="lec" element={<Lecture />} />
           

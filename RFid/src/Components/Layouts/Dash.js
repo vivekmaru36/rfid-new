@@ -133,7 +133,7 @@ const Dash = () => {
           <div className="font-semibold">
             Attendance
             <p className="text-sm font-normal lg:text-base ">
-              Add or Edit Attendance
+              Attendance
             </p>
           </div>
         </Link>

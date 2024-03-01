@@ -124,7 +124,7 @@ const Lecture_History = () => {
                                             .find(details => details.details.name === selectedName)
                                             ?.attendance
                                     }</p>
-                                    {/* Assuming lectureHistorydetails has 'attendance' */}
+                                    
                                 </div>
                             )}
                         </div>
