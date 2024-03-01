@@ -103,7 +103,7 @@ const Lecture_History = () => {
                             <p>Lecture Date: {convertToIST12HourFormatWithDate(lecture.Lecdate)}</p>
                             <p>Start Time: {convertToIST12HourFormatWithDate(lecture.sTime)}</p>
                             <p>End Time: {convertToIST12HourFormatWithDate(lecture.eTime)}</p>
-                            <p>Classroom: {convertToIST12HourFormatWithDate(lecture.venue)}</p>
+                            <p>Classroom: {lecture.venue}</p>
                             <p>Course: {lecture.course}</p>
                             <p>Subject: {lecture.Subject}</p>
                             {/* <select onChange={() => handleDropdownChange(lecture._id)}> */}
