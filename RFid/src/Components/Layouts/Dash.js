@@ -132,9 +132,7 @@ const Dash = () => {
           <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
           <div className="font-semibold">
             Attendance
-            <p className="text-sm font-normal lg:text-base ">
-              Add or Edit Attendance
-            </p>
+            
           </div>
         </Link>
 
@@ -224,7 +222,7 @@ const Dash = () => {
           <div className="font-semibold">
             Attendance
             <p className="text-sm font-normal lg:text-base ">
-              Add or Edit Attendance
+              
             </p>
           </div>
         </Link>
