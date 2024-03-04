@@ -121,7 +121,7 @@ const Lecture_History = () => {
                                 <div>
                                     <p>Attendance: {
                                         lectureHistorydetails
-                                            .find(details => details.details.name === selectedName)
+                                            .find(details => details.details.name === selectedName && details.hardwaredetails._id===lecture._id)
                                             ?.attendance
                                     }</p>
                                     
