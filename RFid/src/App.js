@@ -40,6 +40,7 @@ import Lecture from "./Components/Queries/Lecture";
 import HardwareRoom from "./Rooms/HardwareRoom";
 import RecentRecords from "./Components/Layouts/RecentRecords";
 import Lecture_History from "./Components/Queries/Lecture_History";
+import EntryGate from "./Rooms/Entry_Gate";
 
 
 
@@ -61,6 +62,9 @@ function App() {
 
         {/* Route for Hardware Room */}
         <Route path="HardwareRoom" element={<HardwareRoom/>} />
+
+        {/* Route for Entry Gate */}
+        <Route path="EntryGate" element={<EntryGate/>} />
         
         <Route
           path="/dash"
