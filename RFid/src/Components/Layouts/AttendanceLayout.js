@@ -4,7 +4,7 @@ import Loading from "./Loading";
 
 const AttendanceLayout = () => {
   const AttendanceStudent = lazy(() => import("../Queries/AttendanceStudent"));
-  const LecHistory = lazy(() => import("../Queries/Lecture_History"));
+  const AtttendanceTeacherView = lazy(() => import("../Queries/Teacher_Stu_Attendance"));
   const { user } = useContext(UserContext);
   return (
     <>
@@ -14,7 +14,7 @@ const AttendanceLayout = () => {
         </Suspense>
       ) : (
         <Suspense fallback={<Loading />}>
-          <LecHistory />
+          <AtttendanceTeacherView />
         </Suspense>
       )}
     </>

@@ -110,7 +110,9 @@ const Lecture = () => {
     // pick subject
     const [Subject, setSubject] = useState('');
 
-    // function to set lec
+    // function to set 
+    
+    // console.log(user.email);
 
     const setlec = async (e) => {
         e.preventDefault();
@@ -127,7 +129,7 @@ const Lecture = () => {
                 etime: new Date(endtime).toISOString(),
                 rfidno: user.rfid,
                 course: user.course,
-
+                email:user.email
             });
             toast.dismiss();
 

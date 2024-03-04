@@ -39,6 +39,7 @@ import Otpt from "./Components/otp/otpt";
 import Lecture from "./Components/Queries/Lecture";
 import HardwareRoom from "./Rooms/HardwareRoom";
 import RecentRecords from "./Components/Layouts/RecentRecords";
+import Lecture_History from "./Components/Queries/Lecture_History";
 
 
 
@@ -72,8 +73,10 @@ function App() {
           
           <Route path="lec" element={<Lecture />} />
           
+          {/* <Route path="attendance" element={<AttendanceLayout />} /> */}
           <Route path="attendance" element={<AttendanceLayout />} />
-          <Route path="Lectures_History" element={<AttendanceLayout />} />
+          {/* <Route path="Lectures_History" element={<AttendanceLayout />} /> */}
+          <Route path="Lectures_History" element={<Lecture_History />} />
           <Route path="RecentRecords" element={<RecentRecords />} />
           <Route path="time_schedule" element={<TimeScheduleForm />} />
           <Route path="profile" element={<Profile />} />

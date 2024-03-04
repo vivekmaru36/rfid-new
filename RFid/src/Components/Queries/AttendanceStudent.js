@@ -12,6 +12,8 @@ const AttendanceStudent = () => {
   // const [date, setDate] = useState("");
   const [error, setError] = useState("");
 
+  console.log(user);
+
   // fetching Attendance
   const fetchAttendance = async (e) => {
     e.preventDefault();
@@ -20,7 +22,8 @@ const AttendanceStudent = () => {
     try {
       const response = await axios.post(
         `http://localhost:3500/student/getattendance`, {
-        rfid: user.rfid
+        rfid: user.rfid,
+        course:user.course
       });
       setAttendance(response.data.attendance);
     } catch (err) {
