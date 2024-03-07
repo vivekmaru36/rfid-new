@@ -1,109 +1,103 @@
-import { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../../config/api/axios";
-import UserContext from "../../Hooks/UserContext";
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
-import { toast } from "react-toastify";
-import { TableHeader } from "../Table";
 import Loading from "../Layouts/Loading";
 import ErrorStrip from "../ErrorStrip";
 
 const TimeScheduleFormstu = () => {
-  const { user } = useContext(UserContext);
-  const [timeSchedule, setTimeSchedule] = useState({});
-  const [disabled, setDisabled] = useState(true);
-  const [id, setId] = useState("");
-  const [error, setError] = useState("");
+    const [timeSchedule, setTimeSchedule] = useState({});
+    const [error, setError] = useState("");
+    const [disabled, setDisabled] = useState(true);
 
-  // updating attendance state on "onChange" event.
-  const handleFormChange = (e) => {
-    // the whole thing is a convoluted mess, but it WORKS.
-    // if you have an alternative, DM ;).
-    const index = parseInt(e.target.id);
-    const day = e.target.name;
-    const value = e.target.value;
-    const newDay = timeSchedule[day].map((val, ind) => {
-      if (ind === index) {
-        return value;
-      } else return val;
-    });
-    setTimeSchedule({
-      ...timeSchedule,
-      [e.target.name]: newDay,
-    });
-  };
+    function convertToIST12HourFormatWithDate(timestampString) {
+        // Parse the input timestamp string
+        const timestampUTC = new Date(timestampString);
 
-  useEffect(() => {
-    const fetchTimeSchedule = async () => {
-      try {
-        // fetching time schedule record
-        const response = await axios.get("time_schedule/" + user._id);
-        // saving record id for updating/deleting record
-        setId(response.data._id);
-        delete response.data.schedule._id;
-        setTimeSchedule(response.data.schedule);
-      } catch (err) {
-        // incase the record doesn't exist
-        if (err?.response?.status === 404) {
-          setDisabled(false);
-          setTimeSchedule({
-            monday: ["--", "--", "--", "--", "--"],
-            tuesday: ["--", "--", "--", "--", "--"],
-            wednesday: ["--", "--", "--", "--", "--"],
-            thursday: ["--", "--", "--", "--", "--"],
-            friday: ["--", "--", "--", "--", "--"],
-          });
-        } else setError(err);
-      }
-    };
-    fetchTimeSchedule();
-  }, [user]);
+        console.log(timestampUTC);
 
-  const addTimeSchedule = async (e) => {
-    e.preventDefault();
-    const data = {
-      //TODO change Schema to user.
-      teacher: user._id,
-      schedule: timeSchedule,
-    };
-    try {
-      // adding a new time schedule record
-      const response = await axios.post("time_schedule/" + user._id, data);
-      toast.success(response.data.message);
-    } catch (err) {
-      // conflict, record already exists
-      if (err.response.status === 409) {
-        // updating existing record
-        const response = await axios.patch("time_schedule/" + user._id, data);
-        toast.success(response.data.message);
-      } else setError(err);
-    } finally {
-      setDisabled(true);
+        // // Set the time zone to Indian Standard Time (IST)
+        // timestampUTC.setUTCHours(timestampUTC.getUTCHours() + 5);
+        // timestampUTC.setUTCMinutes(timestampUTC.getUTCMinutes() + 30);
+
+        // Format the date and time in 12-hour format with AM/PM
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'short',
+            minute: 'short',
+            second: 'short',
+            hour12: true,
+        };
+        const istTime12HourFormatWithDate = timestampUTC.toLocaleString('en-US',);
+
+        return istTime12HourFormatWithDate;
     }
-  };
 
-  const deleteTimeSchedule = async (e) => {
-    e.preventDefault();
-    const response = await axios.delete("time_schedule/" + id);
-    toast.success(response.data.message, {
-      icon: ({ theme, type }) => <FaTrash />,
-    });
-    setTimeSchedule({
-      monday: ["--", "--", "--", "--", "--"],
-      tuesday: ["--", "--", "--", "--", "--"],
-      wednesday: ["--", "--", "--", "--", "--"],
-      thursday: ["--", "--", "--", "--", "--"],
-      friday: ["--", "--", "--", "--", "--"],
-    });
-  };
+    useEffect(() => {
+        const fetchTimeSchedule = async () => {
+            try {
+                // Fetch time schedule data
+                const response = await axios.get("time_schedule/View_Time_Schedule");
+                // Set the fetched data to state
+                setTimeSchedule(response.data);
+            } catch (err) {
+                // Handle errors
+                setError(err.message);
+            }
+        };
+        fetchTimeSchedule();
+    }, []);
 
-  return (
-    <main className="time_schedule">
-      <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
-        View Time Schedule
-      </h2>
- 
-    </main>
-  );
+    // Function to render the time schedule table
+    const renderTimeScheduleTable = () => {
+        // Check if time schedule data is available
+        if (Object.keys(timeSchedule).length === 0) {
+            return <Loading />;
+        }
+
+        return (
+            <div className="my-4 w-full overflow-auto rounded-md border-2 border-slate-900 dark:border-slate-500 dark:p-[1px]">
+                <table className="w-full text-center">
+                    <tbody>
+                        {Object.entries(timeSchedule.schedule).map(([day, subjects], index) => (
+                            <tr key={index}>
+                                <th className="border-none bg-slate-900 px-4 py-4 text-base capitalize text-slate-100">
+                                    {day}
+                                </th>
+                                {Array.isArray(subjects) ? (
+                                    subjects.map((subject, subIndex) => (
+                                        <td
+                                            key={subIndex}
+                                            className="min-w-[180px] border-l-[1px] border-t-[1px] border-slate-400 p-1 first:border-none"
+                                        >
+                                            {subject}
+                                        </td>
+                                    ))
+                                ) : (
+                                    <td className="min-w-[180px] border-l-[1px] border-t-[1px] border-slate-400 p-1 first:border-none">
+                                        {subjects}
+                                    </td>
+                                )}
+                            </tr>
+                        ))}
+                    </tbody>
+                    <p>{convertToIST12HourFormatWithDate(timeSchedule.sdate)}</p>
+                </table>
+            </div>
+        );
+    };
+
+
+    return (
+        <main className="time_schedule">
+            <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
+                Time Schedule
+            </h2>
+            {renderTimeScheduleTable()}
+            {error && <ErrorStrip error={error} />}
+        </main>
+    );
 };
 
 export default TimeScheduleFormstu;

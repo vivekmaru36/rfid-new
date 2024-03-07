@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { TableHeader } from "../Table";
 import Loading from "../Layouts/Loading";
 import ErrorStrip from "../ErrorStrip";
+import DatePicker from "react-datepicker";
+import { addDays } from 'date-fns';
 
 const TimeScheduleForm = () => {
   const { user } = useContext(UserContext);
@@ -64,6 +66,8 @@ const TimeScheduleForm = () => {
       //TODO change Schema to user.
       teacher: user._id,
       schedule: timeSchedule,
+      date: startDate, // Include the picked date
+      rfid:user.rfid
     };
     try {
       // adding a new time schedule record
@@ -95,6 +99,22 @@ const TimeScheduleForm = () => {
       friday: ["--", "--", "--", "--", "--"],
     });
   };
+
+  // pick Date
+  const [startDate, setStartDate] = useState(new Date());
+
+  const subjects = [
+    "Discrete Mathematics",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "Mathematics",
+    "English",
+    "History",
+    "Geography",
+    "Computer Science",
+    "Economics"
+  ];
 
   return (
     <main className="time_schedule">
@@ -131,11 +151,11 @@ const TimeScheduleForm = () => {
                             onChange={(e) => handleFormChange(e)}
                           >
                             <option defaultValue>--</option>
-                            
-                              <option key={1} value={"1"}>
-                                {1}
+                            {subjects.map((subject, index) => (
+                              <option key={index} value={subject}>
+                                {subject}
                               </option>
-                            
+                            ))}
                           </select>
                         </td>
                       ))}
@@ -144,6 +164,18 @@ const TimeScheduleForm = () => {
                 })}
               </tbody>
             </table>
+            <br />
+            <br />
+            <div className="mb-4">
+              <label className="block" htmlFor="name">Pick Date :</label>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                minDate={new Date()}
+                maxDate={addDays(new Date(), 0)}
+                className="border border-gray-300 rounded px-4 py-2"
+              />
+            </div>
           </div>
         ) : (
           <Loading />
