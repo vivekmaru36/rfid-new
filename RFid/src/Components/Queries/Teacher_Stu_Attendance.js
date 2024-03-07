@@ -10,61 +10,39 @@ import ErrorStrip from "../ErrorStrip";
 
 const Teacher_Stu_Attendance = () => {
 
-
-    // fetching Lecture for tea
+    // fetching students for teacher
     const { user } = React.useContext(UserContext);
 
-    const [lectureHistory, setLectureHistory] = useState([]);
+    // const [Totalstudents, setTotalstudents] = useState([]);
+    const [studentsFirstYear, setStudentsFirstYear] = useState([]);
+    const [studentsSecondYear, setStudentsSecondYear] = useState([]);
+    const [studentsThirdYear, setStudentsThirdYear] = useState([]);
 
-    const [selectedId, setSelectedId] = useState(null);
-
-    const [lectureHistorydetails, setLectureHistorydetails] = useState([]);
-
-    const [selectedName, setSelectedName] = useState('');
 
 
     useEffect(() => {
-        const fetchLecHistory = async () => {
+        const fetchstudentsinyourcourse = async () => {
             try {
-                const response = await axios.post('http://localhost:3500/LecHistory', {
-                    rfid: user.rfid
+                const response = await axios.post('http://localhost:3500/LecHistory/StudentInYourCourse', {
+                    rfid: user.rfid,
+                    course: user.course
                 });
-                if (response.data.TotalLecs) {
-                    setLectureHistory(response.data.TotalLecs);
-                    sendIdsToBackend(response.data.TotalLecs);
-                } else {
-                    toast.error("No lectures to display");
+                if (response.data.studentsFirstYear) {
+                    setStudentsFirstYear(response.data.studentsFirstYear);
+                }
+                if (response.data.studentsSecondYear) {
+                    setStudentsSecondYear(response.data.studentsSecondYear);
+                }
+                if (response.data.studentsThirdYear) {
+                    setStudentsThirdYear(response.data.studentsThirdYear);
                 }
             } catch (error) {
-                toast.error("Failed to fetch lecture history");
+                toast.error("Failed to fetch students in your course");
             }
         };
 
-        fetchLecHistory();
+        fetchstudentsinyourcourse();
     }, []);
-
-    
-    useEffect(() => {
-
-    }, []);
-    const sendIdsToBackend = async (lectures) => {
-        try {
-            const ids = lectures.map(lecture => lecture._id);
-            const response = await axios.post('http://localhost:3500/LecHistory/ids', {
-                ids: ids
-            });
-            setLectureHistorydetails(response.data.TotalLecsdetails);
-            // console.log(response.data.TotalLecsdetails); // Assuming you want to log the response
-        } catch (error) {
-            toast.error("Failed to send lecture IDs to backend");
-        }
-    };
-
-    const handleDropdownChange = (id,selectedName) => {
-        setSelectedId(id);
-        setSelectedName(selectedName);
-        console.log(selectedName);
-    };
 
     // function of date conversion
 
@@ -96,43 +74,40 @@ const Teacher_Stu_Attendance = () => {
 
     return (
         <main className="self-center">
-            {lectureHistory.length > 0 ? (
-                <div className="grid grid-cols-1 place-content-center gap-3 px-1 py-4 lg:grid-cols-2 lg:gap-4 lg:px-8 xl:grid-cols-3">
-                    {lectureHistory.map(lecture => (
-                        <div key={lecture._id} className="font-semibold">
-                            <p>Lecture Date: {convertToIST12HourFormatWithDate(lecture.Lecdate)}</p>
-                            <p>Start Time: {convertToIST12HourFormatWithDate(lecture.sTime)}</p>
-                            <p>End Time: {convertToIST12HourFormatWithDate(lecture.eTime)}</p>
-                            <p>Classroom: {lecture.venue}</p>
-                            <p>Course: {lecture.course}</p>
-                            <p>Subject: {lecture.Subject}</p>
-                            {/* <select onChange={() => handleDropdownChange(lecture._id)}> */}
-                            <select onChange={(e) => handleDropdownChange(lecture._id, e.target.value)}>
-                                <option value="">Those who were There</option>
-                                {lectureHistorydetails
-                                    .filter(details => details.hardwaredetails._id === lecture._id)
-                                    .map(details => (
-                                        <option key={details._id} value={details.details.name}>
-                                            {details.details.name}
-                                        </option>
-                                    ))}
-                            </select>
-                            {selectedId === lecture._id && (
-                                <div>
-                                    <p>Attendance: {
-                                        lectureHistorydetails
-                                            .find(details => details.details.name === selectedName && details.hardwaredetails._id===lecture._id)
-                                            ?.attendance
-                                    }</p>
-                                    
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
-            ) : (
-                <div className="text-center text-red-500">No lectures to display</div>
-            )}
+            <div>
+                <h2>Students in 1st Year</h2>
+                {studentsFirstYear.map((student) => (
+                    <div key={student._id}>
+                        <p>Name: {student.name}</p>
+                        <p>Course: {student.course}</p>
+                        {/* Add more student information as needed */}
+                        <br ></br>
+                    </div>
+                ))}
+            </div>
+
+            <div>
+                <h2>Students in 2nd Year</h2>
+                {studentsSecondYear.map((student) => (
+                    <div key={student._id}>
+                        <p>Name: {student.name}</p>
+                        <p>Course: {student.course}</p>
+                        {/* Add more student information as needed */}
+                        <br ></br>
+                    </div>
+                ))}
+            </div>
+
+            <div>
+                <h2>Students in 3rd Year</h2>
+                {studentsThirdYear.map((student) => (
+                    <div key={student._id}>
+                        <p>Name: {student.name}</p>
+                        <p>Course: {student.course}</p>
+                        {/* Add more student information as needed */}
+                    </div>
+                ))}
+            </div>
         </main>
 
     );
