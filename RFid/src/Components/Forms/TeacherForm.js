@@ -113,7 +113,7 @@ const TeacherForm = () => {
       <input
         className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400 "
         name="rfid"
-        type="text"
+        type="number"
         required
         id="username"
         value={teacher.rfid}
