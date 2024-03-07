@@ -41,6 +41,7 @@ import HardwareRoom from "./Rooms/HardwareRoom";
 import RecentRecords from "./Components/Layouts/RecentRecords";
 import Lecture_History from "./Components/Queries/Lecture_History";
 import EntryGate from "./Rooms/Entry_Gate";
+import TimeScheduleFormstu from "./Components/Queries/TimescheduleFormstu";
 
 
 
@@ -84,6 +85,7 @@ function App() {
           <Route path="Lectures_History" element={<Lecture_History />} />
           <Route path="RecentRecords" element={<RecentRecords />} />
           <Route path="time_schedule" element={<TimeScheduleForm />} />
+          <Route path="time_schedulestu" element={<TimeScheduleFormstu />} />
           <Route path="profile" element={<Profile />} />
         </Route>
       </Route>

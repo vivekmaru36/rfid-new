@@ -34,7 +34,15 @@ const Nav = () => {
               All Students in Your Course
             </li>
           </NavLink>
-          <NavLink to={"./time_schedule"} className="w-full font-medium">
+          {user.rfid === "3424265225" && (
+            <NavLink to={"./time_schedule"} className="w-full font-medium">
+              <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
+                <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
+                Time Schedule
+              </li>
+            </NavLink>
+          )}
+          <NavLink to={"./time_schedulestu"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
               <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
               Time Schedule
@@ -89,7 +97,7 @@ const Nav = () => {
               Attendance
             </li>
           </NavLink>
-          <NavLink to={"./time_schedule"} className="w-full font-medium">
+          <NavLink to={"./time_schedulestu"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
               <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
               Time Schedule
