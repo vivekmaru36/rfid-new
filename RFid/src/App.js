@@ -79,6 +79,7 @@ function App() {
           
           {/* <Route path="attendance" element={<AttendanceLayout />} /> */}
           <Route path="attendance" element={<AttendanceLayout />} />
+          <Route path="AllStudents" element={<AttendanceLayout />} />
           {/* <Route path="Lectures_History" element={<AttendanceLayout />} /> */}
           <Route path="Lectures_History" element={<Lecture_History />} />
           <Route path="RecentRecords" element={<RecentRecords />} />

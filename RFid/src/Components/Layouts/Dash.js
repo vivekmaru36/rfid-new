@@ -9,7 +9,7 @@ import { PiBooks, PiUser, PiStudent } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
-import { FaHistory } from "react-icons/fa";
+import { FaHistory, FaUsers } from "react-icons/fa";
 
 const Dash = () => {
   const { user } = useContext(UserContext);
@@ -39,11 +39,12 @@ const Dash = () => {
 
           <Link
             className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
-            to={"./attendance"}
+            to={"./AllStudents"}
           >
-            <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+            {/* <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " /> */}
+            <FaUsers className="text-[2.5rem] lg:text-[4rem] " />
             <div className="font-semibold">
-              Attendance
+                  All Students in Your Course
               <p className="text-sm font-normal lg:text-base ">
                 
               </p>
