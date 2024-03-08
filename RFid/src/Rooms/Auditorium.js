@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Library = () => {
+const Auditorium = () => {
   const [rfidNumber, setRfidNumber] = useState('');
   const [userLocation, setUserLocation] = useState(null);
   const [userIP, setUserIP] = useState('');
@@ -17,7 +17,7 @@ const Library = () => {
     try {
 
       // Make an HTTP POST request to the /hrfid endpoint with the RFID number, location, and IP data
-      const response = await fetch('http://localhost:3500/HardwareRoom/Library', {
+      const response = await fetch('http://localhost:3500/HardwareRoom/Auditorium', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,10 +26,10 @@ const Library = () => {
       });
 
       if (response.ok) {
-        console.log('RFID number sent successfully From Library');
+        console.log('RFID number sent successfully From Auditorium');
         // Optionally, you can handle success actions here
       } else {
-        console.error('Failed to send RFID number From Library');
+        console.error('Failed to send RFID number From Auditorium');
         // Optionally, you can handle error actions here
       }
     } catch (error) {
@@ -74,7 +74,7 @@ const Library = () => {
 
   return (
     <div>
-      <h2>RFID Form For Library</h2>
+      <h2>RFID Form For Auditorium</h2>
       <input
         type="text"
         value={rfidNumber}
@@ -95,4 +95,4 @@ const Library = () => {
   );
 };
 
-export default Library;
+export default Auditorium;

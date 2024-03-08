@@ -43,6 +43,7 @@ import Lecture_History from "./Components/Queries/Lecture_History";
 import EntryGate from "./Rooms/Entry_Gate";
 import TimeScheduleFormstu from "./Components/Queries/TimescheduleFormstu";
 import Library from "./Rooms/Library";
+import Auditorium from "./Rooms/Auditorium";
 
 
 
@@ -70,6 +71,9 @@ function App() {
 
         {/* Route for Library */}
         <Route path="Library" element={<Library/>} />
+
+        {/* Route for Auditorium */}
+        <Route path="Auditorium" element={<Auditorium/>} />
         
         <Route
           path="/dash"
