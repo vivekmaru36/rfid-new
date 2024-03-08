@@ -33,6 +33,8 @@ import StudentForm from "./Components/Forms/StudentForm";
 
 import TimeScheduleForm from "./Components/Forms/TimeScheduleForm";
 import Login from "./Components/Forms/Login";
+import ForgotPasswordForm from './Components/Forms/ForgotPasswordForm';
+import ResetPasswordForm from './Components/Forms/ResetPasswordForm';
 
 import Otp from "./Components/otp/otp";
 import Otpt from "./Components/otp/otpt";
@@ -41,13 +43,12 @@ import HardwareRoom from "./Rooms/HardwareRoom";
 import RecentRecords from "./Components/Layouts/RecentRecords";
 
 
-
-
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<AppLayout />} errorElement={<ErrorElement />}>
         <Route index element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterLayout />}>
           <Route path="reg_teacher" element={<TeacherForm />} />
           <Route path="reg_student" element={<StudentForm />} />
@@ -57,6 +58,8 @@ function App() {
         {/* <Route path="Verfied" element={<Verified />} /> */}
         <Route path="otp" element={< Otp/>} />
         <Route path="otpt" element={< Otpt/>} />
+        <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
 
         {/* Route for Hardware Room */}
         <Route path="HardwareRoom" element={<HardwareRoom/>} />

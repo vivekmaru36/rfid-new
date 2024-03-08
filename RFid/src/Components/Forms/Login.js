@@ -1,8 +1,7 @@
 import { useContext, useState, useEffect } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
-
 import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
 import CircleDesign from "../Layouts/CircleDesign";
 import ErrorStrip from "../ErrorStrip";
@@ -20,7 +19,7 @@ const Login = () => {
   const slowLoadingIndicator = () => {
     setTimeout(() => {
       setMessage(
-        "NOTE:Web Services on the free instance type are automatically spun down after 15 minutes of inactivity. When a new request for a free service comes in, Render spins it up again so it can process the request. This will cause a delay in the response of the first request after a period of inactivity while the instance spins up."
+        "NOTE: Web Services on the free instance type are automatically spun down after 15 minutes of inactivity. When a new request for a free service comes in, Render spins it up again so it can process the request. This will cause a delay in the response of the first request after a period of inactivity while the instance spins up."
       );
     }, 4000);
   };
@@ -37,7 +36,7 @@ const Login = () => {
       setButtonText("Loading...");
       slowLoadingIndicator();
       try {
-        const response = await axios.post("/auth/login/" + userType, {
+        const response = await axios.post(`/auth/login/${userType}`, {
           email,
           password,
         });
@@ -72,7 +71,7 @@ const Login = () => {
           )}
           <CircleDesign />
           <section className="z-0 mb-4 flex items-center gap-2 whitespace-nowrap text-6xl md:text-8xl lg:gap-4">
-          
+            {/* Your existing code for icons */}
           </section>
           <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-80 hover:opacity-100 focus:opacity-100  dark:bg-[#060913] sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)] ">
             <form
@@ -116,7 +115,7 @@ const Login = () => {
                   ) : userType === "teacher" ? (
                     <PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                   ) : (
-                    
+                    // <FaUniversity className="animate-fadeIn rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                     <p style={{ fontSize: '20px' }}>Select User Type</p>
                   )}
                 </div>
@@ -162,16 +161,21 @@ const Login = () => {
                 <button
                   type="button"
                   className="font-semibold text-violet-600 decoration-2 hover:underline focus:underline   dark:text-violet-400"
-                  onClick={() => navigate("./register/reg_student")}
+                  onClick={() => navigate("/register/reg_student")}
                 >
                   Register
                 </button>
+                <div className="ml-auto">
+                  <Link to="/forgot-password" className="text-violet-600 decoration-2 hover:underline focus:underline dark:text-violet-400 mb-4">
+                    Forgot Password?
+                  </Link>
+                </div>
               </section>
             </form>
           </section>
         </main>
       ) : (
-        <Navigate to="./dash" />
+        <Navigate to="/dash" />
       )}
     </>
   );

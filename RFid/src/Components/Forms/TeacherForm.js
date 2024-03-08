@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "../../config/api/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ErrorStrip from "../ErrorStrip";
 
 // Teacher Registration Form
 const TeacherForm = () => {
@@ -14,6 +15,7 @@ const TeacherForm = () => {
     rfid: "",
     password: "",
   });
+
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [courseError, setCourseError] = useState("");
@@ -28,43 +30,48 @@ const TeacherForm = () => {
     setTeacher({
       ...teacher,
       [e.target.name]: e.target.value,
+      // [e.target.id]: e.target.value,
     });
   };
 
+  //TODO Add more departments
   const addTeacher = async (e) => {
     e.preventDefault();
 
-    // Validation
-    if (!nameRegex.test(teacher.name.trim())) {
-      setNameError("Name required & should contain only letters");
-      return;
-    }
-
-    if (!emailRegex.test(teacher.email.trim())) {
-      setEmailError("Invalid email format");
-      return;
-    }
-
-    if (!teacher.course.trim()) {
-      setCourseError("Please select a course");
-      return;
-    }
-
-    if (teacher.rfid.length !== 10) {
-      setRfidError("Numeric RFID must be 10 digits");
-      return;
-    }
-
-    if (!teacher.password.trim() || teacher.password.trim().length < 6) {
-      setPasswordError("Password should be at least 6 characters");
-      return;
-    }
+        // Validation
+        if (!nameRegex.test(teacher.name.trim())) {
+          setNameError("Name required & should contain only letters");
+          return;
+        }
+    
+        if (!emailRegex.test(teacher.email.trim())) {
+          setEmailError("Invalid email format");
+          return;
+        }
+    
+        if (!teacher.course.trim()) {
+          setCourseError("Please select a course");
+          return;
+        }
+    
+        if (teacher.rfid.length !== 10) {
+          setRfidError("Numeric RFID must be 10 digits");
+          return;
+        }
+    
+        if (!teacher.password.trim() || teacher.password.trim().length < 6) {
+          setPasswordError("Password should be at least 6 characters");
+          return;
+        }
 
     try {
       const reqData = JSON.stringify(teacher);
+      // const response = await axios.post("teacher/123", reqData);
       toast.loading("Registering .....");
+
       const response = await axios.post("Teacher", reqData);
-      navigate("/otpt", { state: { teacher: teacher } });
+      // navigate("../");
+      navigate("/otpt",{ state: { teacher: teacher } });
       toast.dismiss();
       toast.success(response.data.message);
     } catch (err) {
@@ -176,11 +183,7 @@ const TeacherForm = () => {
         Register
       </button>
 
-      {error ? (
-        <p style={{ color: "red", textAlign: "center" }}>{error}</p>
-      ) : (
-        ""
-      )}
+      {error ? <ErrorStrip error={error} /> : ""}
     </form>
   );
 };

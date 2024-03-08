@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "../../config/api/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ErrorStrip from "../ErrorStrip";
 
 const StudentForm = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const StudentForm = () => {
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
 
+  
   const nameRegex = /[a-zA-Z]+$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -69,7 +71,8 @@ const StudentForm = () => {
       const reqData = JSON.stringify(student);
       toast.loading("Registering .....");
       const response = await axios.post("student", reqData);
-      navigate("/otp", { state: { student: student } });
+      // navigate("../");
+      navigate("/otp",{ state: { student: student } });
       toast.dismiss();
       toast.success(response.data.message);
     } catch (err) {
@@ -192,12 +195,7 @@ const StudentForm = () => {
       >
         Register
       </button>
-
-      {error ? (
-        <p style={{ color: "red", textAlign: "center" }}>{error}</p>
-      ) : (
-        ""
-      )}
+      {error ? <ErrorStrip error={error} /> : ""}
     </form>
   );
 };
