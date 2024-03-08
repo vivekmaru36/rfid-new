@@ -42,6 +42,7 @@ import RecentRecords from "./Components/Layouts/RecentRecords";
 import Lecture_History from "./Components/Queries/Lecture_History";
 import EntryGate from "./Rooms/Entry_Gate";
 import TimeScheduleFormstu from "./Components/Queries/TimescheduleFormstu";
+import Library from "./Rooms/Library";
 
 
 
@@ -66,6 +67,9 @@ function App() {
 
         {/* Route for Entry Gate */}
         <Route path="EntryGate" element={<EntryGate/>} />
+
+        {/* Route for Library */}
+        <Route path="Library" element={<Library/>} />
         
         <Route
           path="/dash"
