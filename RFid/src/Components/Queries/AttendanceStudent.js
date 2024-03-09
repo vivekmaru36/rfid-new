@@ -111,54 +111,11 @@ const AttendanceStudent = () => {
           {attendance.map((recorda, index) => (
             <div key={index}>
               <ul>
-                <li>Classrrom : {recorda.Venue}</li>
+                <li>Classrrom : {recorda.venue}</li>
                 <li>Lecture Date : {convertToIST12HourFormatWithDate(recorda.sTime)}</li>
                 <li>Subject : {recorda.Subject}</li>
                 <li>Teacher : {recorda.Teacher}</li>
                 <li>Attendance : {recorda.attendance}</li>
-              </ul>
-              <br />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>No recent Records To Display</p>
-      )}
-
-      <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
-        Total Lecs
-      </h2>
-      <section className="attendance__head">
-        <form className="w-full gap-4 accent-violet-900 md:flex ">
-
-          <div className="flex items-end">
-            <button
-              className="mb-4 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
-              type="submit"
-              onClick={(e) => fetchallLectures(e)}
-            >
-              Fetch Total Lecs
-            </button>
-          </div>
-        </form>
-      </section>
-      <div>{error ? <ErrorStrip error={error.message} /> : ""}</div>
-
-      {AllLecs && AllLecs.length > 0 ? (
-        <div>
-          {AllLecs.map((record, index) => (
-            <div key={index}>
-              <ul>
-                <li>Classrrom : {record.venue}</li>
-                <li>Lecture Date : {convertToIST12HourFormatWithDate(record.sTime)}</li>
-                <li>Subject : {record.Subject}</li>
-                <li>Teacher : {record.Teacher}</li>
-                {/* <li>
-                  Attendance :{' '}
-                  {attendance.find(recorda => recorda.hardwaredetails.sTime === record.sTime && recorda.attendance)
-                    ? 'Present'
-                    : 'Absent'}
-                </li> */}
               </ul>
               <br />
             </div>
