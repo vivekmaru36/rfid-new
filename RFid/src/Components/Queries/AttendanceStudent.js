@@ -22,7 +22,8 @@ const AttendanceStudent = () => {
       const response = await axios.post(
         `http://localhost:3500/student/getAllLecs`, {
         rfid: user.rfid,
-        course: user.course
+        course: user.course,
+        Year:user.Year
       });
       setLecs(response.data.AllLecs);
     } catch (err) {
@@ -44,7 +45,8 @@ const AttendanceStudent = () => {
       const response = await axios.post(
         `http://localhost:3500/student/getattendance`, {
         rfid: user.rfid,
-        course: user.course
+        course: user.course,
+        Year:user.Year
       });
       setAttendance(response.data.attendance);
     } catch (err) {
@@ -103,7 +105,7 @@ const AttendanceStudent = () => {
       </section>
       <div>{error ? <ErrorStrip error={error.message} /> : ""}</div>
 
-      {attendance.length > 0 ? (
+      {attendance && attendance.length > 0 ? (
         <div>
           {attendance.map((record, index) => (
             <div key={index}>
@@ -141,7 +143,7 @@ const AttendanceStudent = () => {
       </section>
       <div>{error ? <ErrorStrip error={error.message} /> : ""}</div>
 
-      {AllLecs.length > 0 ? (
+      {AllLecs && AllLecs.length > 0 ? (
         <div>
           {AllLecs.map((record, index) => (
             <div key={index}>

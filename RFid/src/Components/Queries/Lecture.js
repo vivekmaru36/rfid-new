@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 
 const Lecture = () => {
-    
+
     const { user } = React.useContext(UserContext);
     console.log(user.rfid);
 
@@ -43,7 +43,8 @@ const Lecture = () => {
         Subject: "",
         LectureStartTime: "",
         LectureEndTime: "",
-        Lecdate: ""
+        Lecdate: "",
+        Year: ""
     });
 
     // auto del api
@@ -75,7 +76,8 @@ const Lecture = () => {
                         Venue: ldata.venue,
                         course: ldata.course,
                         rfidno: ldata.rfidno,
-                        Subject: ldata.Subject
+                        Subject: ldata.Subject,
+                        Year: ldata.Year
                     });
 
                     // Check if eTime has passed from the current time
@@ -83,8 +85,8 @@ const Lecture = () => {
                     const eTimeUTC = new Date(ldata.eTime);
 
                     if (currentWorldTime > eTimeUTC) {
-                      // Call the delete API
-                      handleAutoDel();
+                        // Call the delete API
+                        handleAutoDel();
                     }
                 } else {
                     console.error('Error fetching Law details:', response.data.message);
@@ -110,8 +112,16 @@ const Lecture = () => {
     // pick subject
     const [Subject, setSubject] = useState('');
 
+    // pick Year
+    const [Year, setYear] = useState('');
+
+    // Update the selected year in the state
+    const handleYearChange = (e) => {
+        setYear(e.target.value);
+    };
+
     // function to set 
-    
+
     // console.log(user.email);
 
     const setlec = async (e) => {
@@ -129,7 +139,8 @@ const Lecture = () => {
                 etime: new Date(endtime).toISOString(),
                 rfidno: user.rfid,
                 course: user.course,
-                email:user.email
+                email: user.email,
+                Year: Year
             });
             toast.dismiss();
 
@@ -257,6 +268,22 @@ const Lecture = () => {
                             required
                         />
                     </div>
+                    {/* Year */}
+                    <div className="mb-4">
+                        <label className="block" htmlFor="name">For Which Year :</label>
+                        <select
+                            className="mb-4 block h-10 "
+                            id="Year"
+                            value={Year}
+                            onChange={handleYearChange}
+                            required
+                        >
+                            <option value="">Select Year</option>
+                            <option value="1st">First</option>
+                            <option value="2nd">Second</option>
+                            <option value="3rd">Third</option>
+                        </select>
+                    </div>
                     {/* Submit Button */}
                     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Submit
@@ -292,6 +319,10 @@ const Lecture = () => {
                             <tr class="border-t-[1px] border-slate-400 last:border-b-0">
                                 <th class="bg-slate-900 p-2 text-base capitalize text-slate-100">End Time</th>
                                 <td class="px-4 py-2">{convertToIST12HourFormatWithDate(LecDetails.LectureEndTime)}</td>
+                            </tr>
+                            <tr class="border-t-[1px] border-slate-400 last:border-b-0">
+                                <th class="bg-slate-900 p-2 text-base capitalize text-slate-100">For </th>
+                                <td class="px-4 py-2">{LecDetails.Year} Year</td>
                             </tr>
                         </tbody>
                     </table>
@@ -332,6 +363,10 @@ const Lecture = () => {
                                 <th class="bg-slate-900 p-2 text-base capitalize text-slate-100">End Time</th>
                                 {/* <td class="px-4 py-2">{LecDetails.LectureEndTime}</td> */}
                                 <td class="px-4 py-2">{convertToIST12HourFormatWithDate(LecDetails.LectureEndTime)}</td>
+                            </tr>
+                            <tr class="border-t-[1px] border-slate-400 last:border-b-0">
+                                <th class="bg-slate-900 p-2 text-base capitalize text-slate-100">For </th>
+                                <td class="px-4 py-2">{LecDetails.Year} Year</td>
                             </tr>
                         </tbody>
                     </table>
@@ -374,6 +409,10 @@ const Lecture = () => {
                                 <th class="bg-slate-900 p-2 text-base capitalize text-slate-100">End Time</th>
                                 {/* <td class="px-4 py-2">{LecDetails.LectureEndTime}</td> */}
                                 <td class="px-4 py-2">{convertToIST12HourFormatWithDate(LecDetails.LectureEndTime)}</td>
+                            </tr>
+                            <tr class="border-t-[1px] border-slate-400 last:border-b-0">
+                                <th class="bg-slate-900 p-2 text-base capitalize text-slate-100">For </th>
+                                <td class="px-4 py-2">{LecDetails.Year} Year</td>
                             </tr>
                         </tbody>
                     </table>

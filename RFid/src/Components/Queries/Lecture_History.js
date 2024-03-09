@@ -106,6 +106,7 @@ const Lecture_History = () => {
                             <p>Classroom: {lecture.venue}</p>
                             <p>Course: {lecture.course}</p>
                             <p>Subject: {lecture.Subject}</p>
+                            <p>Year : {lecture.Year}</p>
                             {/* <select onChange={() => handleDropdownChange(lecture._id)}> */}
                             <select onChange={(e) => handleDropdownChange(lecture._id, e.target.value)}>
                                 <option value="">Those who were There</option>
