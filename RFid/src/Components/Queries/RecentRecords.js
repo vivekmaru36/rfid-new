@@ -89,6 +89,7 @@ const RecentInternalStudent = () => {
                                 <li>Place : {record.Venue}</li>
                                 <li>Rfid Swipped at Time : {convertToIST12HourFormatWithDate(record.currentTime)}</li>
                             </ul>
+                            <br /> 
                         </div>
                     ))}
                 </div>
