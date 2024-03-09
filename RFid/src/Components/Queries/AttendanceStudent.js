@@ -12,9 +12,9 @@ const AttendanceStudent = () => {
   // const [date, setDate] = useState("");
   const [error, setError] = useState("");
 
-  const [AllLecs,setLecs]=useState([]);
+  const [AllLecs, setLecs] = useState([]);
 
-  const fetchallLectures=async(e)=>{
+  const fetchallLectures = async (e) => {
     e.preventDefault();
     setLecs([]);
     setError("");
@@ -23,7 +23,7 @@ const AttendanceStudent = () => {
         `http://localhost:3500/student/getAllLecs`, {
         rfid: user.rfid,
         course: user.course,
-        Year:user.Year
+        Year: user.Year
       });
       setLecs(response.data.AllLecs);
     } catch (err) {
@@ -46,9 +46,10 @@ const AttendanceStudent = () => {
         `http://localhost:3500/student/getattendance`, {
         rfid: user.rfid,
         course: user.course,
-        Year:user.Year
+        Year: user.Year
       });
-      setAttendance(response.data.attendance);
+      setAttendance(response.data.lecturesWithAttendance);
+      console.log(attendance);
     } catch (err) {
       setError(err);
     }
@@ -107,14 +108,14 @@ const AttendanceStudent = () => {
 
       {attendance && attendance.length > 0 ? (
         <div>
-          {attendance.map((record, index) => (
+          {attendance.map((recorda, index) => (
             <div key={index}>
               <ul>
-                <li>Classrrom : {record.Venue}</li>
-                <li>Lecture Date : {convertToIST12HourFormatWithDate(record.hardwaredetails.sTime)}</li>
-                <li>Subject : {record.hardwaredetails.Subject}</li>
-                <li>Teacher : {record.hardwaredetails.Teacher}</li>
-                <li>Attendance : {record.attendance}</li>
+                <li>Classrrom : {recorda.Venue}</li>
+                <li>Lecture Date : {convertToIST12HourFormatWithDate(recorda.sTime)}</li>
+                <li>Subject : {recorda.Subject}</li>
+                <li>Teacher : {recorda.Teacher}</li>
+                <li>Attendance : {recorda.attendance}</li>
               </ul>
               <br />
             </div>
@@ -152,6 +153,12 @@ const AttendanceStudent = () => {
                 <li>Lecture Date : {convertToIST12HourFormatWithDate(record.sTime)}</li>
                 <li>Subject : {record.Subject}</li>
                 <li>Teacher : {record.Teacher}</li>
+                {/* <li>
+                  Attendance :{' '}
+                  {attendance.find(recorda => recorda.hardwaredetails.sTime === record.sTime && recorda.attendance)
+                    ? 'Present'
+                    : 'Absent'}
+                </li> */}
               </ul>
               <br />
             </div>
