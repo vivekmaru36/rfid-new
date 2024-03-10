@@ -40,38 +40,46 @@ const Teacher_Stu_Attendance = () => {
 
     const [attendanceChartData, setAttendanceChartData] = useState(null); // State for attendance chart data
 
+    const [showChart, setShowChart] = useState(true); // State to control chart visibility
+
+    function handleToggleChart() {
+        setShowChart(!showChart);
+    }
+
     const generateChartData = (attendanceData) => {
         const labels = attendanceData.map((lecture) => lecture.Subject);
         const data = attendanceData.map((lecture) => {
-            return lecture.attendance === "Present" ? 1 : 0;
+            return lecture.attendance === "Present" ? 1 : 1;
+        });
+
+        const backgroundColors = attendanceData.map((lecture) => {
+            return lecture.attendance === "Present" ? "green" : "red"; // Set color based on attendance
         });
 
         return {
             labels: labels,
             datasets: [
                 {
-                    label: "Attendance",
+                    label: "Attendance : green for Present  and Red for Absent",
                     data: data,
-                    backgroundColor: ["red", "blue"], // Colors for Present and Absent
+                    // backgroundColor: ["green", "red"], // Colors for Present and Absent
+                    backgroundColor: backgroundColors,
                 },
             ],
         };
     };
     const [attendanceData, setAttendanceData] = useState({}); // State for attendance data
 
-    const fetchAttendanceAndUpdateChart = async (student, rfid, course, Year) => {
+    const fetchAttendanceAndUpdateChart = async (student) => {
         try {
             const response = await axios.post("http://localhost:3500/student/getattendance", {
-                rfid: rfid,
-                course: course,
-                Year: Year
+                rfid: student.rfid,
+                course: student.course,
+                Year: student.Year
             });
-
-            // setAttendance(response.data.lecturesWithAttendance);
 
             // Generate chart data and update state
             const chartData = generateChartData(response.data.lecturesWithAttendance);
-            // setAttendanceChartData(chartData);
             setAttendanceData({ ...attendanceData, [student._id]: { attendance: response.data.lecturesWithAttendance, chartData: chartData } });
         } catch (err) {
             setError(err);
@@ -131,6 +139,16 @@ const Teacher_Stu_Attendance = () => {
         return istTime12HourFormatWithDate;
     }
 
+    const toggleChartVisibility = (studentId) => {
+        setAttendanceData((prevData) => ({
+            ...prevData,
+            [studentId]: {
+                ...prevData[studentId],
+                showChart: !prevData[studentId]?.showChart, // Toggle visibility if already exists
+            },
+        }));
+    };
+
 
 
     return (
@@ -145,11 +163,27 @@ const Teacher_Stu_Attendance = () => {
                         {/* <br /> */}
                         <button
                             className="mb-4 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
-                            // onClick={}
-                            onClick={() => fetchAttendance(student.rfid, student.course, student.Year)}
+
+
+                            onClick={() => fetchAttendanceAndUpdateChart(student)}
+
                         >
                             Fetch
                         </button>
+
+                        <button
+                            className="mb-4 ml-2 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
+
+                            // onClick={handleToggleChart}
+                            onClick={() => toggleChartVisibility(student._id)}
+                        >
+                            {attendanceData[student._id]?.showChart ? 'Hide Chart' : 'Show Chart'}
+
+                        </button>
+
+                        {attendanceData[student._id]?.showChart && (
+                            <Bar data={attendanceData[student._id]?.chartData} />
+                        )}
 
                         <br ></br>
                     </div>
@@ -165,16 +199,28 @@ const Teacher_Stu_Attendance = () => {
                         {/* Add more student information as needed */}
                         <button
                             className="mb-4 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
-                            // onClick={}
-                            // onClick={() => fetchAttendance(student.rfid, student.course, student.Year)}
-                            onClick={() => fetchAttendanceAndUpdateChart(student,student.rfid, student.course, student.Year)}
+
+
+                            onClick={() => fetchAttendanceAndUpdateChart(student)}
+
                         >
                             Fetch
                         </button>
-                        {attendanceData[student._id] && (
-                            <Bar data={attendanceData[student._id].chartData} />
+
+                        <button
+                            className="mb-4 ml-2 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
+
+                            // onClick={handleToggleChart}
+                            onClick={() => toggleChartVisibility(student._id)}
+                        >
+                            {attendanceData[student._id]?.showChart ? 'Hide Chart' : 'Show Chart'}
+
+                        </button>
+
+                        {attendanceData[student._id]?.showChart && (
+                            <Bar data={attendanceData[student._id]?.chartData} />
                         )}
-                        
+
                         <br ></br>
                     </div>
                 ))}
@@ -189,11 +235,27 @@ const Teacher_Stu_Attendance = () => {
                         {/* Add more student information as needed */}
                         <button
                             className="mb-4 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
-                            // onClick={}
-                            onClick={() => fetchAttendance(student.rfid, student.course, student.Year)}
+
+
+                            onClick={() => fetchAttendanceAndUpdateChart(student)}
+
                         >
                             Fetch
                         </button>
+
+                        <button
+                            className="mb-4 ml-2 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
+
+                            // onClick={handleToggleChart}
+                            onClick={() => toggleChartVisibility(student._id)}
+                        >
+                            {attendanceData[student._id]?.showChart ? 'Hide Chart' : 'Show Chart'}
+
+                        </button>
+
+                        {attendanceData[student._id]?.showChart && (
+                            <Bar data={attendanceData[student._id]?.chartData} />
+                        )}
                         <br ></br>
                     </div>
                 ))}
