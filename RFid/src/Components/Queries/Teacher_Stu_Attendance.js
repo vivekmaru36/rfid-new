@@ -1,12 +1,13 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import axios from "../../config/api/axios";
 import UserContext from "../../Hooks/UserContext";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import React from "react";
-
-
+import Chart from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
 import ErrorStrip from "../ErrorStrip";
+import { Pie } from "react-chartjs-2";
 
 const Teacher_Stu_Attendance = () => {
 
@@ -18,6 +19,64 @@ const Teacher_Stu_Attendance = () => {
     const [studentsSecondYear, setStudentsSecondYear] = useState([]);
     const [studentsThirdYear, setStudentsThirdYear] = useState([]);
 
+    const [attendance, setAttendance] = useState([]);
+    const [error, setError] = useState("");
+    const chartRef = useRef(null);
+
+
+    const fetchAttendance = async (rfid, course, Year) => {
+        try {
+            const response = await axios.post("http://localhost:3500/student/getattendance", {
+                rfid: rfid,
+                course: course,
+                Year: Year
+            });
+            setAttendance(response.data.lecturesWithAttendance);
+            //   console.log(attendance)
+        } catch (err) {
+            setError(err);
+        }
+    };
+
+    const [attendanceChartData, setAttendanceChartData] = useState(null); // State for attendance chart data
+
+    const generateChartData = (attendanceData) => {
+        const labels = attendanceData.map((lecture) => lecture.Subject);
+        const data = attendanceData.map((lecture) => {
+            return lecture.attendance === "Present" ? 1 : 0;
+        });
+
+        return {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Attendance",
+                    data: data,
+                    backgroundColor: ["red", "blue"], // Colors for Present and Absent
+                },
+            ],
+        };
+    };
+    const [attendanceData, setAttendanceData] = useState({}); // State for attendance data
+
+    const fetchAttendanceAndUpdateChart = async (student, rfid, course, Year) => {
+        try {
+            const response = await axios.post("http://localhost:3500/student/getattendance", {
+                rfid: rfid,
+                course: course,
+                Year: Year
+            });
+
+            // setAttendance(response.data.lecturesWithAttendance);
+
+            // Generate chart data and update state
+            const chartData = generateChartData(response.data.lecturesWithAttendance);
+            // setAttendanceChartData(chartData);
+            setAttendanceData({ ...attendanceData, [student._id]: { attendance: response.data.lecturesWithAttendance, chartData: chartData } });
+        } catch (err) {
+            setError(err);
+        }
+    };
 
 
     useEffect(() => {
@@ -72,6 +131,8 @@ const Teacher_Stu_Attendance = () => {
         return istTime12HourFormatWithDate;
     }
 
+
+
     return (
         <main className="self-center">
             <div>
@@ -81,6 +142,15 @@ const Teacher_Stu_Attendance = () => {
                         <p>Name: {student.name}</p>
                         <p>Course: {student.course}</p>
                         {/* Add more student information as needed */}
+                        {/* <br /> */}
+                        <button
+                            className="mb-4 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
+                            // onClick={}
+                            onClick={() => fetchAttendance(student.rfid, student.course, student.Year)}
+                        >
+                            Fetch
+                        </button>
+
                         <br ></br>
                     </div>
                 ))}
@@ -93,6 +163,18 @@ const Teacher_Stu_Attendance = () => {
                         <p>Name: {student.name}</p>
                         <p>Course: {student.course}</p>
                         {/* Add more student information as needed */}
+                        <button
+                            className="mb-4 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
+                            // onClick={}
+                            // onClick={() => fetchAttendance(student.rfid, student.course, student.Year)}
+                            onClick={() => fetchAttendanceAndUpdateChart(student,student.rfid, student.course, student.Year)}
+                        >
+                            Fetch
+                        </button>
+                        {attendanceData[student._id] && (
+                            <Bar data={attendanceData[student._id].chartData} />
+                        )}
+                        
                         <br ></br>
                     </div>
                 ))}
@@ -105,6 +187,14 @@ const Teacher_Stu_Attendance = () => {
                         <p>Name: {student.name}</p>
                         <p>Course: {student.course}</p>
                         {/* Add more student information as needed */}
+                        <button
+                            className="mb-4 h-10 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-8 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-not-allowed dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900 md:w-auto"
+                            // onClick={}
+                            onClick={() => fetchAttendance(student.rfid, student.course, student.Year)}
+                        >
+                            Fetch
+                        </button>
+                        <br ></br>
                     </div>
                 ))}
             </div>
