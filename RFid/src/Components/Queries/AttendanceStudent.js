@@ -32,30 +32,32 @@ const AttendanceStudent = () => {
     if (chartRef.current) {
       chartRef.current.destroy();
     }
-    const ctx = document.getElementById("attendance-chart");
-    const newChartInstance = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Present", "Absent"],
-        datasets: [
-          {
-            label: "Attendance",
-            backgroundColor: ["green", "red"],
-            borderColor: ["green", "red"],
-            borderWidth: 1,
-            data: calculateAttendanceData()
-          }
-        ]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    if (attendance.length > 0) {
+      const ctx = document.getElementById("attendance-chart");
+      const newChartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Present", "Absent"],
+          datasets: [
+            {
+              label: "Attendance",
+              backgroundColor: ["green", "red"],
+              borderColor: ["green", "red"],
+              borderWidth: 1,
+              data: calculateAttendanceData()
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
-    chartRef.current = newChartInstance;
+      });
+      chartRef.current = newChartInstance;
+    }
   }, [attendance]);
 
   const calculateAttendanceData = () => {
@@ -71,32 +73,20 @@ const AttendanceStudent = () => {
     return [attendanceCounts.Present, attendanceCounts.Absent];
   };
 
-  function convertToIST12HourFormatWithDate(timestampString) {
-    // Parse the input timestamp string
+  const convertToIST12HourFormatWithDate = timestampString => {
     const timestampUTC = new Date(timestampString);
-
-    console.log(timestampUTC);
-
-    // // Set the time zone to Indian Standard Time (IST)
-    // timestampUTC.setUTCHours(timestampUTC.getUTCHours() + 5);
-    // timestampUTC.setUTCMinutes(timestampUTC.getUTCMinutes() + 30);
-
-    // Format the date and time in 12-hour format with AM/PM
     const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'short',
-        minute: 'short',
-        second: 'short',
-        hour12: true,
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hour12: true
     };
-    const istTime12HourFormatWithDate = timestampUTC.toLocaleString('en-US',);
-
-    return istTime12HourFormatWithDate;
-}
-  
+    return timestampUTC.toLocaleString("en-US", options);
+  };
 
   return (
     <main className="attendance">
@@ -112,23 +102,29 @@ const AttendanceStudent = () => {
         </button>
       </section>
       {error && <ErrorStrip error={error.message} />}
-      <div className="bar-chart-container">
-        <canvas id="attendance-chart"></canvas>
-      </div>
-      <div>
-        {attendance.map((recorda, index) => (
-          <div key={index}>
-            <ul>
-              <li>Classroom: {recorda.venue}</li>
-              <li>Lecture Date: {convertToIST12HourFormatWithDate(recorda.sTime)}</li>
-              <li>Subject: {recorda.Subject}</li>
-              <li>Teacher: {recorda.Teacher}</li>
-              <li>Attendance: {recorda.attendance}</li>
-            </ul>
-            <br />
+      {attendance.length > 0 ? (
+        <>
+          <div className="bar-chart-container">
+            <canvas id="attendance-chart"></canvas>
           </div>
-        ))}
-      </div>
+          <div>
+            {attendance.map((recorda, index) => (
+              <div key={index}>
+                <ul>
+                  <li>Classroom: {recorda.venue}</li>
+                  <li>Lecture Date: {convertToIST12HourFormatWithDate(recorda.sTime)}</li>
+                  <li>Subject: {recorda.Subject}</li>
+                  <li>Teacher: {recorda.Teacher}</li>
+                  <li>Attendance: {recorda.attendance}</li>
+                </ul>
+                <br />
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p>No records to display</p>
+      )}
     </main>
   );
 };
