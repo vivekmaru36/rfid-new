@@ -108,6 +108,7 @@ const AttendanceStudent = () => {
             <canvas id="attendance-chart"></canvas>
           </div>
           <div>
+            <h3>All Lectures:</h3>
             {attendance.map((recorda, index) => (
               <div key={index}>
                 <ul>
