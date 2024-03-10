@@ -35,7 +35,7 @@ const AttendanceStudent = () => {
     if (attendance.length > 0) {
       const ctx = document.getElementById("attendance-chart");
       const newChartInstance = new Chart(ctx, {
-        type: "bar",
+        type: "doughnut",
         data: {
           labels: ["Present", "Absent"],
           datasets: [
