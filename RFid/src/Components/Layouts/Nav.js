@@ -34,7 +34,7 @@ const Nav = () => {
               All Students in Your Course
             </li>
           </NavLink>
-          {user.rfid === "3424265225" && (
+          {user.rfid === "0006338040" && (
             <NavLink to={"./time_schedule"} className="w-full font-medium">
               <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
                 <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />

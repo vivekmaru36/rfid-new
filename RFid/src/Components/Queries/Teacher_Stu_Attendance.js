@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import React from "react";
 import Chart from "chart.js/auto";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import ErrorStrip from "../ErrorStrip";
 import { Pie } from "react-chartjs-2";
 
@@ -53,7 +53,7 @@ const Teacher_Stu_Attendance = () => {
         });
 
         const backgroundColors = attendanceData.map((lecture) => {
-            return lecture.attendance === "Present" ? "green" : "red"; // Set color based on attendance
+            return lecture.attendance === "Present" ? "#98FB98" : "#FFC0CB"; // Set color based on attendance
         });
 
         return {

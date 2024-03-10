@@ -41,7 +41,7 @@ const AttendanceStudent = () => {
           datasets: [
             {
               label: "Attendance",
-              backgroundColor: ["green", "red"],
+              backgroundColor: ["#98FB98", "#FFC0CB"],
               borderColor: ["green", "red"],
               borderWidth: 1,
               data: calculateAttendanceData()
