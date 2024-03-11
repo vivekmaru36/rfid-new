@@ -103,18 +103,42 @@ const TimeScheduleForm = () => {
   // pick Date
   const [startDate, setStartDate] = useState(new Date());
 
+  // const subjects = [
+  //   "Discrete Mathematics",
+  //   "Physics",
+  //   "Chemistry",
+  //   "Biology",
+  //   "Mathematics",
+  //   "English",
+  //   "History",
+  //   "Geography",
+  //   "Computer Science",
+  //   "Economics"
+  // ];
+
   const subjects = [
-    "Discrete Mathematics",
-    "Physics",
-    "Chemistry",
-    "Biology",
-    "Mathematics",
-    "English",
-    "History",
-    "Geography",
-    "Computer Science",
-    "Economics"
-  ];
+    "Programming Fundamentals",
+    "Data Structures and Algorithms",
+    "Computer Architecture",
+    "Operating Systems",
+    "Database Management Systems",
+    "Software Engineering",
+    "Networking",
+    "Web Development",
+    "Cybersecurity",
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Computer Graphics",
+    "Human-Computer Interaction",
+    "Parallel and Distributed Computing",
+    "Mobile Application Development",
+    "Cloud Computing",
+    "Big Data Analytics",
+    "Computer Vision",
+    "Natural Language Processing",
+    "Information Retrieval"
+];
+
 
   return (
     <main className="time_schedule">
@@ -172,7 +196,7 @@ const TimeScheduleForm = () => {
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 minDate={new Date()}
-                maxDate={addDays(new Date(), 0)}
+                maxDate={addDays(new Date(), 3)}
                 className="border border-gray-300 rounded px-4 py-2"
               />
             </div>

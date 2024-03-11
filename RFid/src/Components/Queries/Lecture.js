@@ -225,7 +225,7 @@ const Lecture = () => {
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
                             minDate={new Date()}
-                            maxDate={addDays(new Date(), 2)}
+                            maxDate={addDays(new Date(), 0)}
                             className="border border-gray-300 rounded px-4 py-2"
                         />
                     </div>
