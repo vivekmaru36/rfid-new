@@ -109,11 +109,29 @@ const Login = () => {
                       onClick={() => setUserType("student")}
                     />
                   </label>
+                  {/* Add admin option */}
+                  <label
+                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tr-lg p-4 dark:border-r-[1.5px] dark:border-t-[1.5px] dark:border-solid dark:border-violet-900"
+                    htmlFor="admin"
+                  >
+                    Admin
+                    <input
+                      className="absolute opacity-0"
+                      type="radio"
+                      value="admin"
+                      id="admin"
+                      name="userType"
+                      onClick={() => setUserType("admin")}
+                    />
+                  </label>
                 </div>
                 <div className="flex w-full justify-center p-1 pt-0 text-8xl dark:border-x-[1.5px] dark:border-solid dark:border-violet-900 md:p-3 md:pt-0">
                   {userType === "student" ? (
                     <PiStudentThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                   ) : userType === "teacher" ? (
+                    <PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+                  ) : userType === "admin" ? (
+                    // Add icon for admin
                     <PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                   ) : (
                     

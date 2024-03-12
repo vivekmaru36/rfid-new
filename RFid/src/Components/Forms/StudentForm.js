@@ -30,7 +30,7 @@ const StudentForm = () => {
       toast.loading("Registering .....");
       const response = await axios.post("student", reqData);
       // navigate("../");
-      navigate("/otp",{ state: { student: student } });
+      // navigate("/otp",{ state: { student: student } });
       toast.dismiss();
       toast.success(response.data.message);
     } catch (err) {

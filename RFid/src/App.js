@@ -44,6 +44,9 @@ import EntryGate from "./Rooms/Entry_Gate";
 import TimeScheduleFormstu from "./Components/Queries/TimescheduleFormstu";
 import Library from "./Rooms/Library";
 import Auditorium from "./Rooms/Auditorium";
+import AdminStudent from "./Components/Admin/AdminStudent";
+import AdminTeacher from "./Components/Admin/AdminTeacher";
+import AdminViewStudents from "./Components/Admin/AdminViewStudent";
 
 
 
@@ -95,6 +98,11 @@ function App() {
           <Route path="time_schedule" element={<TimeScheduleForm />} />
           <Route path="time_schedulestu" element={<TimeScheduleFormstu />} />
           <Route path="profile" element={<Profile />} />
+
+          {/* Admin Routes */}
+          <Route path="Students" element={<AdminStudent />} />
+          <Route path="Teachers" element={<AdminTeacher />} />
+          <Route path="View_Students" element={<AdminViewStudents />} />
         </Route>
       </Route>
     )
