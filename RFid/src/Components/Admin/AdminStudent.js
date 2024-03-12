@@ -17,6 +17,7 @@ const AdminStudent = () => {
         Add student
       </div>
       <StudentForm/>
+      {/* <RegisterLayout/> */}
     </main>
   );
 };

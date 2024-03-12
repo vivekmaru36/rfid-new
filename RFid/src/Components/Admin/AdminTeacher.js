@@ -3,6 +3,7 @@ import UserContext from "../../Hooks/UserContext";
 import Loading from "../Layouts/Loading";
 import axios from "../../config/api/axios";
 import { PiUserThin, PiStudentThin } from "react-icons/pi";
+import TeacherForm from "../Forms/TeacherForm";
 
 const AdminTeacher = () => {
   const { user } = React.useContext(UserContext);
@@ -15,6 +16,7 @@ const AdminTeacher = () => {
       <div>
         Add Teacher
       </div>
+      <TeacherForm/>
     </main>
   );
 };

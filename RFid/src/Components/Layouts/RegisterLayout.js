@@ -1,6 +1,6 @@
 import React from "react";
 import CircleDesign from "./CircleDesign";
-import { FaUniversity } from "react-icons/fa";
+
 import { PiStudentThin, PiUserThin } from "react-icons/pi";
 import { NavLink, Link, Outlet, useLocation } from "react-router-dom";
 

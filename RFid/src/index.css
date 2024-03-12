@@ -99,5 +99,45 @@
       background-color: #2e1065 !important;
     }
   }
-  
+
+  .students-container {
+    display: flex;
+     flex-direction: column; /*Stack year containers vertically */
+    gap: 20px;
+}
+
+.year-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px; /* Add margin to create space between year sections */
+}
+
+.year-container h2 {
+    margin-top: 0;
+}
+
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.student-table th,
+.student-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.delete-button {
+    background-color: #f83d1d;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #cc4c39;
+}
+
 }

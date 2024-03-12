@@ -47,6 +47,8 @@ import Auditorium from "./Rooms/Auditorium";
 import AdminStudent from "./Components/Admin/AdminStudent";
 import AdminTeacher from "./Components/Admin/AdminTeacher";
 import AdminViewStudents from "./Components/Admin/AdminViewStudent";
+import AdminViewTeacher from "./Components/Admin/AdminViewTeacher";
+import AdminAssignLectures from "./Components/Admin/AdminAssignLectures";
 
 
 
@@ -103,6 +105,8 @@ function App() {
           <Route path="Students" element={<AdminStudent />} />
           <Route path="Teachers" element={<AdminTeacher />} />
           <Route path="View_Students" element={<AdminViewStudents />} />
+          <Route path="View_Teachers" element={<AdminViewTeacher />} />
+          <Route path="AssignLec" element={<AdminAssignLectures />} />
         </Route>
       </Route>
     )

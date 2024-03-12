@@ -14,6 +14,7 @@ const TeacherForm = () => {
     role: "",
     rfid: "",
     password: "",
+    Year: ""
   });
   const [error, setError] = useState("");
 
@@ -21,6 +22,14 @@ const TeacherForm = () => {
     setTeacher({
       ...teacher,
       [e.target.name]: e.target.value,
+      // [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleFormChangeYear = (e) => {
+    setTeacher({
+      ...teacher,
+      [e.target.id]: e.target.value,
       // [e.target.id]: e.target.value,
     });
   };
@@ -35,11 +44,13 @@ const TeacherForm = () => {
 
       const response = await axios.post("Teacher", reqData);
       // navigate("../");
-      navigate("/otpt",{ state: { teacher: teacher } });
+      // navigate("/otpt",{ state: { teacher: teacher } });
       toast.dismiss();
       toast.success(response.data.message);
     } catch (err) {
       setError(err);
+      toast.dismiss();
+
     }
   };
 
@@ -106,6 +117,21 @@ const TeacherForm = () => {
           BA
         </option>
 
+      </select>
+
+      <label className="block" htmlFor="course">
+        Year
+      </label>
+      <select
+        className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400"
+        id="Year"
+        value={teacher.Year}
+        onChange={(e) => handleFormChangeYear(e)}
+      >
+        <option value="">Select Year</option>
+        <option value="1st">First</option>
+        <option value="2nd">Second</option>
+        <option value="3rd">Third</option>
       </select>
       <label className="block" htmlFor="username">
         Rfid :

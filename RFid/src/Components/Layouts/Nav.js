@@ -150,6 +150,20 @@ const Nav = () => {
               View Students
             </li>
           </NavLink>
+
+          <NavLink to={"./View_Teachers"} className="w-full font-medium">
+            <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
+              <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
+              View Teachers
+            </li>
+          </NavLink>
+
+          <NavLink to={"./AssignLec"} className="w-full font-medium">
+            <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
+              <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
+              Assign Lectures
+            </li>
+          </NavLink>
           
           <NavLink to={"./time_schedulestu"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
