@@ -3,7 +3,9 @@ import { useNavigate, Navigate } from "react-router-dom";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
 
-import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
+import { PiStudentThin, PiSpinnerGapBold } from "react-icons/pi";
+import { GiTeacher } from "react-icons/gi";
+import { MdAdminPanelSettings } from "react-icons/md";
 import CircleDesign from "../Layouts/CircleDesign";
 import ErrorStrip from "../ErrorStrip";
 
@@ -129,10 +131,13 @@ const Login = () => {
                   {userType === "student" ? (
                     <PiStudentThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                   ) : userType === "teacher" ? (
-                    <PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+                    //<PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+                    <GiTeacher className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                   ) : userType === "admin" ? (
                     // Add icon for admin
-                    <PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+                    //<PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+                    <MdAdminPanelSettings className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
+
                   ) : (
                     
                     <p style={{ fontSize: '20px' }}>Select User Type</p>
@@ -174,16 +179,7 @@ const Login = () => {
                   {buttonText}
                 </button>
                 {error ? <ErrorStrip error={error} /> : ""}
-                <p className="inline text-slate-600 dark:text-violet-200">
-                  Click to{" "}
-                </p>
-                <button
-                  type="button"
-                  className="font-semibold text-violet-600 decoration-2 hover:underline focus:underline   dark:text-violet-400"
-                  onClick={() => navigate("./register/reg_student")}
-                >
-                  Register
-                </button>
+                
               </section>
             </form>
           </section>

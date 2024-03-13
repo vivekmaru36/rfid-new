@@ -59,12 +59,10 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<AppLayout />} errorElement={<ErrorElement />}>
         <Route index element={<Login />} />
-        <Route path="/register" element={<RegisterLayout />}>
+        {/* <Route path="/register" element={<RegisterLayout />}>
           <Route path="reg_teacher" element={<TeacherForm />} />
           <Route path="reg_student" element={<StudentForm />} />
-          {/* <Route path="otp" element={< Otp/>} />
-          // <Route path="Verfied" element={<Verified />} /> */}
-        </Route>
+        </Route> */}
         {/* <Route path="Verfied" element={<Verified />} /> */}
         <Route path="otp" element={< Otp/>} />
         <Route path="otpt" element={< Otpt/>} />
