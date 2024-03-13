@@ -1,18 +1,14 @@
-import { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "../../config/api/axios";
 import UserContext from "../../Hooks/UserContext";
 import { toast } from "react-toastify";
-
 import ErrorStrip from "../ErrorStrip";
-import React from "react";
 
 const AdminRecentRecords = () => {
     const { user } = React.useContext(UserContext);
     const [records, setRecords] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
-    // function of date conversion
 
     function convertToIST12HourFormatWithDate(timestampString) {
         // Parse the input timestamp string
@@ -53,14 +49,9 @@ const AdminRecentRecords = () => {
         }
     };
 
-
     useEffect(() => {
         fetchRecords();
     }, []);
-
-    useEffect(() => {
-        console.log(records); // Log records here
-    }, [records]);
 
     return (
         <main className="internal">
@@ -75,25 +66,49 @@ const AdminRecentRecords = () => {
                 Fetch
             </button>
 
-            {records.length > 0 ? (
-                <div>
-                    {records.map((record, index) => (
-                        <div key={index}>
-                            <ul>
-                                <li>Place : {record.Venue}</li>
-                                <li>Rfid Swipped at Time : {convertToIST12HourFormatWithDate(record.currentTime)}</li>
-                                <li>Name : {record.details.name}</li>
-                                <li>Role : {record.foundInCollection}</li>
-                            </ul>
-                            <br />
+            {loading ? (
+                <p className="loading">Loading...</p>
+            ) : error ? (
+                <ErrorStrip className="error" error={error} />
+            ) : records.length > 0 ? (
+                <div className="students-container">
+                    {Object.entries(records.reduce((acc, record) => {
+                        if (!acc[record.Venue]) {
+                            acc[record.Venue] = [];
+                        }
+                        acc[record.Venue].push(record);
+                        return acc;
+                    }, {})).map(([venue, venueRecords]) => (
+                        <div key={venue} className="year-container">
+                            <h3 className="font-bold">{venue}</h3>
+                            <table className="student-table">
+                                <thead>
+                                    <tr>
+                                        <th className="border">Name</th>
+                                        <th className="border">Role</th>
+                                        <th className="border">Rfid Swiped at Time</th>
+                                        <th className="border">Rfid</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {venueRecords.sort((a, b) => new Date(b.currentTime) - new Date(a.currentTime)).map((record, index) => (
+                                        <tr key={index} className="year-container">
+                                            <td className="border border-gray-500">{record.details.name}</td>
+                                            <td className="border border-gray-500">{record.foundInCollection}</td>
+                                            <td className="border border-gray-500">{convertToIST12HourFormatWithDate(record.currentTime)}</td>
+                                            <td className="border border-gray-500">{record.details.rfid}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     ))}
                 </div>
             ) : (
-                <p>No recent Records To Display</p>
+                <p className="no-records">No recent Records To Display</p>
             )}
         </main>
     );
 };
 
-export default AdminRecentRecords ;
+export default AdminRecentRecords;
