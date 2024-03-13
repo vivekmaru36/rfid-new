@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
-import { GiBookshelf } from "react-icons/gi";
+import { GiBookshelf, GiTeacher } from "react-icons/gi";
 import { IoCalendarOutline } from "react-icons/io5";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { BiBookAdd } from "react-icons/bi";
 import { RiUserAddLine } from "react-icons/ri";
-import { PiBooks, PiUser, PiStudent } from "react-icons/pi";
+import { PiBooks, PiUser, PiStudent, PiStudentThin } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
 import { FaHistory, FaUsers } from "react-icons/fa";
+import { FaUsersBetweenLines } from "react-icons/fa6";
+import { FaUsersLine } from "react-icons/fa6";
+import { IoCalendar } from "react-icons/io5";
 
 const Dash = () => {
   const { user } = useContext(UserContext);
@@ -222,12 +225,10 @@ const Dash = () => {
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./Students"}
         >
-          <GiBookshelf className="text-[2.5rem] lg:text-[4rem] " />
+          <PiStudent className="text-[2.5rem] lg:text-[4rem] "/>
           <div className="font-semibold">
-            Students
-            <p className="text-sm font-normal lg:text-base ">
-              Add or Delete Students
-            </p>
+          <br />
+            Add Students
           </div>
         </Link>
 
@@ -235,21 +236,23 @@ const Dash = () => {
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./Teachers"}
           >
-          <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+          <GiTeacher className="text-[2.5rem] lg:text-[4rem] " />
           <div className="font-semibold">
-            Add or Delete Teachers 
-            
+            <br />
+            Add Teachers            
           </div>
+          
+          
         </Link>
         <Link
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./View_Students"}
           >
-          <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
+          <FaUsersBetweenLines className="text-[2.5rem] lg:text-[4rem] " />
           <div className="font-semibold">
-            View Students
+            Students
             <p className="text-sm font-normal lg:text-base ">
-              View
+              View Students
             </p>
           </div>
         </Link>
@@ -258,11 +261,11 @@ const Dash = () => {
           className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
           to={"./View_Teachers"}
           >
-          <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
+          <FaUsersLine className="text-[2.5rem] lg:text-[4rem] " />
           <div className="font-semibold">
-            View Teachers
+            Teachers 
             <p className="text-sm font-normal lg:text-base ">
-              View
+              View Teachers
             </p>
           </div>
         </Link>
@@ -272,7 +275,7 @@ const Dash = () => {
             to={"./SetTimeSchedule"}
           >
             {/* <PiBooks className="text-[2.5rem] lg:text-[4rem] " /> */}
-            <AiOutlineSchedule className="text-[2.5rem] lg:text-[4rem] " />
+            <IoCalendar className="text-[2.5rem] lg:text-[4rem] " />
             <div className="font-semibold">
               Set Time Schedule
               <p className="text-sm font-normal lg:text-base ">

@@ -1,14 +1,15 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import UserContext from "../../Hooks/UserContext";
-import { GiBookshelf } from "react-icons/gi";
-import { IoCalendarOutline } from "react-icons/io5";
+import { GiBookshelf, GiTeacher } from "react-icons/gi";
+import { IoCalendar, IoCalendarOutline } from "react-icons/io5";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { BiBookAdd } from "react-icons/bi";
 import { RiUserAddLine } from "react-icons/ri";
 import { PiStudent, PiUser, PiBooks } from "react-icons/pi";
 import { FaHistory, FaUsers } from "react-icons/fa";
+import { FaUsersBetweenLines, FaUsersLine } from "react-icons/fa6";
 
 const Nav = () => {
   const { user } = useContext(UserContext);
@@ -134,26 +135,26 @@ const Nav = () => {
         <ul className="m-auto flex flex-grow flex-col items-center justify-start gap-[6px]">
           <NavLink to={"./Students"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
-              <GiBookshelf className="pt-[0.1rem] text-2xl  " />
-              Add or Delete Students
+              <PiStudent className="pt-[0.1rem] text-2xl  " />
+              Add Students
             </li>
           </NavLink>
           <NavLink to={"./Teachers"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
-              <IoCalendarOutline className="pt-[0.1rem] text-2xl  " />
-              Add or Delete Teachers
+              <GiTeacher className="pt-[0.1rem] text-2xl  " />
+              Add Teachers
             </li>
           </NavLink>
           <NavLink to={"./View_Students"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
-              <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
+              <FaUsersBetweenLines className="pt-[0.1rem] text-2xl  " />
               View Students
             </li>
           </NavLink>
 
           <NavLink to={"./View_Teachers"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
-              <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
+              <FaUsersLine className="pt-[0.1rem] text-2xl  " />
               View Teachers
             </li>
           </NavLink>
@@ -174,7 +175,7 @@ const Nav = () => {
 
           <NavLink to={"./SetTimeSchedule"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
-              <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
+              <IoCalendar className="pt-[0.1rem] text-2xl  " />
               Set Time Schedule
             </li>
           </NavLink>

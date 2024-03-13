@@ -3,6 +3,7 @@ import UserContext from "../../Hooks/UserContext";
 import Loading from "../Layouts/Loading";
 import axios from "../../config/api/axios";
 import { PiUserThin, PiStudentThin } from "react-icons/pi";
+import { MdAdminPanelSettings } from "react-icons/md";
 
 const Profile = () => {
   const { user } = React.useContext(UserContext);
@@ -25,6 +26,8 @@ const Profile = () => {
           <div className=" my-4 flex w-full justify-center overflow-auto dark:border-slate-500 dark:p-[1px]">
             {user.userType === "teacher" ? (
               <PiUserThin className="m-2 rounded-full border-2 border-slate-900 p-1 text-6xl dark:border-slate-300 md:p-2 md:text-9xl lg:text-[12rem]" />
+            ) : user.userType === "admin" ? (
+              <MdAdminPanelSettings className="m-2 rounded-full border-2 border-slate-900 p-1 text-6xl dark:border-slate-300 md:p-2 md:text-9xl lg:text-[12rem]" />
             ) : (
               <PiStudentThin className="m-2 rounded-full border-2 border-slate-900 p-1 text-6xl font-light dark:border-slate-300 md:p-2 md:text-9xl lg:text-[12rem]" />
             )}
