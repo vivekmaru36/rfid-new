@@ -139,13 +139,16 @@ const AdminSetTimeSchedule = () => {
         e.preventDefault();
         const data = {
             //TODO change Schema to user.
-            adminr: user._id,
-            // schedule: combinedData,
-            date: dateRange, // Include the picked date
+            // adminr: user._id,
+            schedule: combinedDatas,
+            // Week: dateRange, // Include the picked date
         };
         try {
             // adding a new time schedule record
-            const response = await axios.post("time_schedule/" + user._id, data);
+            const response = await axios.post("time_schedule/add",{
+                admin :user._id,
+                data:data
+            });
             toast.success(response.data.message);
         } catch (err) {
             // conflict, record already exists
@@ -248,6 +251,8 @@ const AdminSetTimeSchedule = () => {
 
     // console.log(typeof dateRange);
 
+    const [combinedDatas, setCombinedData] = useState();
+
     useEffect(() => {
         const combinedData = {};
 
@@ -274,9 +279,16 @@ const AdminSetTimeSchedule = () => {
             };
         });
 
-        console.log(combinedData);
+        console.log("this is inside", combinedData);
+
+        setCombinedData(combinedData);
+
+        console.log("This is outside", combinedDatas);
 
     }, [selectedSubjects, selectedTeachers, selectedVenue]);
+
+    
+
 
 
     return (
