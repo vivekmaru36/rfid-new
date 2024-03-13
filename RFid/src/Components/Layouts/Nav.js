@@ -171,6 +171,13 @@ const Nav = () => {
               Time Schedule
             </li>
           </NavLink>
+
+          <NavLink to={"./SetTimeSchedule"} className="w-full font-medium">
+            <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
+              <AiOutlineSchedule className="pt-[0.1rem] text-2xl  " />
+              Set Time Schedule
+            </li>
+          </NavLink>
           <NavLink to={"./RecentRecords"} className="w-full font-medium">
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
               <FaHistory className="pt-[0.1rem] text-2xl  " />

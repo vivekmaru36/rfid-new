@@ -49,6 +49,7 @@ import AdminTeacher from "./Components/Admin/AdminTeacher";
 import AdminViewStudents from "./Components/Admin/AdminViewStudent";
 import AdminViewTeacher from "./Components/Admin/AdminViewTeacher";
 import AdminAssignLectures from "./Components/Admin/AdminAssignLectures";
+import AdminSetTimeSchedule from "./Components/Admin/AdminSetTimeSchedule";
 
 
 
@@ -107,6 +108,7 @@ function App() {
           <Route path="View_Students" element={<AdminViewStudents />} />
           <Route path="View_Teachers" element={<AdminViewTeacher />} />
           <Route path="AssignLec" element={<AdminAssignLectures />} />
+          <Route path="SetTimeSchedule" element={<AdminSetTimeSchedule />} />
         </Route>
       </Route>
     )
