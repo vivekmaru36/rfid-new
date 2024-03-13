@@ -1,6 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
-import axios from "../../config/api/axios";
+
 import UserContext from "../../Hooks/UserContext";
+
+import React, { useState, useEffect } from "react";
+import axios from "../../config/api/axios";
 import { toast } from "react-toastify";
 import ErrorStrip from "../ErrorStrip";
 
@@ -9,16 +11,14 @@ const AdminRecentRecords = () => {
     const [records, setRecords] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [selectedVenue, setSelectedVenue] = useState(null);
+    const [venueVisibility, setVenueVisibility] = useState({});
 
     function convertToIST12HourFormatWithDate(timestampString) {
         // Parse the input timestamp string
         const timestampUTC = new Date(timestampString);
 
         console.log(timestampUTC);
-
-        // // Set the time zone to Indian Standard Time (IST)
-        // timestampUTC.setUTCHours(timestampUTC.getUTCHours() + 5);
-        // timestampUTC.setUTCMinutes(timestampUTC.getUTCMinutes() + 30);
 
         // Format the date and time in 12-hour format with AM/PM
         const options = {
@@ -53,6 +53,19 @@ const AdminRecentRecords = () => {
         fetchRecords();
     }, []);
 
+    const handleVenueClick = (venue) => {
+        setSelectedVenue(venue);
+    };
+
+    const toggleVenueVisibility = (venue) => {
+        setVenueVisibility(prevState => ({
+            ...prevState,
+            [venue]: !prevState[venue]
+        }));
+    };
+
+    const filteredRecords = selectedVenue ? records.filter(record => record.Venue === selectedVenue) : records;
+
     return (
         <main className="internal">
             <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
@@ -72,15 +85,31 @@ const AdminRecentRecords = () => {
                 <ErrorStrip className="error" error={error} />
             ) : records.length > 0 ? (
                 <div className="students-container">
-                    {Object.entries(records.reduce((acc, record) => {
-                        if (!acc[record.Venue]) {
-                            acc[record.Venue] = [];
-                        }
-                        acc[record.Venue].push(record);
-                        return acc;
-                    }, {})).map(([venue, venueRecords]) => (
-                        <div key={venue} className="year-container">
-                            <h3 className="font-bold">{venue}</h3>
+                    <div className="">
+                        {Object.keys(records.reduce((acc, record) => {
+                            acc[record.Venue] = true;
+                            return acc;
+                        }, {})).map(venue => (
+                            <div key={venue} className="mb-2">
+                                <button
+                                    className={`inline-block px-4 py-2 mr-2 bg-gray-200 text-gray-700 rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:bg-gray-300 ${selectedVenue === venue ? 'active' : ''}`}
+                                    onClick={() => handleVenueClick(venue)}
+                                >
+                                    {venue}
+                                </button>
+
+                                <button
+                                    className={`inline-block px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600`}
+                                    onClick={() => toggleVenueVisibility(venue)}
+                                >
+                                    {venueVisibility[venue] ? 'Hide' : 'Show'} Data
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="year-container">
+                        <h3 className="font-bold">{selectedVenue || 'All Venues'}</h3>
+                        {venueVisibility[selectedVenue] && (
                             <table className="student-table">
                                 <thead>
                                     <tr>
@@ -91,7 +120,7 @@ const AdminRecentRecords = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {venueRecords.sort((a, b) => new Date(b.currentTime) - new Date(a.currentTime)).map((record, index) => (
+                                    {filteredRecords.sort((a, b) => new Date(b.currentTime) - new Date(a.currentTime)).map((record, index) => (
                                         <tr key={index} className="year-container">
                                             <td className="border border-gray-500">{record.details.name}</td>
                                             <td className="border border-gray-500">{record.foundInCollection}</td>
@@ -101,8 +130,8 @@ const AdminRecentRecords = () => {
                                     ))}
                                 </tbody>
                             </table>
-                        </div>
-                    ))}
+                        )}
+                    </div>
                 </div>
             ) : (
                 <p className="no-records">No recent Records To Display</p>
