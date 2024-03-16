@@ -314,7 +314,7 @@ const AdminSetTimeSchedule = () => {
         return (
             <main className="time_schedule">
                 <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
-                    Time Schedule For First Year
+                    First Year Bsc CS
                 </h2>
                 <form>
                     {timeSchedule.monday ? (
@@ -443,11 +443,11 @@ const AdminSetTimeSchedule = () => {
                 {error ? <ErrorStrip error={error} /> : ""}
             </main>
         );
-    }else {
+    } else {
         return (
             <main className="time_schedule">
                 <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
-                    Time Schedule For First Year
+                    First Year Bsc CS
                 </h2>
                 <form>
                     {timeSchedule.monday ? (
@@ -591,8 +591,6 @@ const AdminSetTimeSchedule = () => {
             </main>
         );
     }
-
-
 
 };
 
