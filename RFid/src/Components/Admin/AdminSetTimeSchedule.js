@@ -139,15 +139,18 @@ const AdminSetTimeSchedule = () => {
         e.preventDefault();
         const data = {
             //TODO change Schema to user.
-            // adminr: user._id,
+            // admin: user._id,
             schedule: combinedDatas,
-            // Week: dateRange, // Include the picked date
+            // Include the picked date
         };
         try {
             // adding a new time schedule record
             const response = await axios.post("time_schedule/add",{
                 admin :user._id,
-                data:data
+                // admin :"snjnsn",
+                data:data,
+                Week: dateRange,
+                Year:currentYear 
             });
             toast.success(response.data.message);
         } catch (err) {
@@ -249,7 +252,7 @@ const AdminSetTimeSchedule = () => {
 
     const dateRange = mondaysAndFridays.length > 0 ? `${mondaysAndFridays[0].monday} - ${mondaysAndFridays[0].friday}` : 'No data available';
 
-    // console.log(typeof dateRange);
+    console.log(dateRange);
 
     const [combinedDatas, setCombinedData] = useState();
 
@@ -389,7 +392,8 @@ const AdminSetTimeSchedule = () => {
                         <div className="mb-4">
 
                             <label className="block font-bold" htmlFor="name">Week : </label>
-                            <p>{mondaysAndFridays.length > 0 ? `${mondaysAndFridays[0].monday} - ${mondaysAndFridays[0].friday}` : 'No data available'}</p>
+                            {/* <p>{mondaysAndFridays.length > 0 ? `${mondaysAndFridays[0].monday} - ${mondaysAndFridays[0].friday}` : 'No data available'}</p> */}
+                            <p>{dateRange}</p>
                             {/* <DatePicker
                                 selected={startDate}
                                 onChange={(date) => setStartDate(date)}
