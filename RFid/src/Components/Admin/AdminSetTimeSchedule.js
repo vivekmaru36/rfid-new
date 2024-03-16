@@ -257,7 +257,7 @@ const AdminSetTimeSchedule = () => {
         const combinedData = {};
 
         // Iterate over the selected subjects, teachers, and venues
-        Object.keys(selectedSubjects).forEach(key => {
+        Object.keys(selectedTeachers).forEach(key => {
             // Extract the day and index from the key
             const [dayIndex, timeIndex] = key.split('-');
 
@@ -317,22 +317,6 @@ const AdminSetTimeSchedule = () => {
                                                     id="table__td"
                                                     key={index}
                                                 >
-                                                    <select
-                                                        className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
-                                                        // value={day}
-                                                        value={selectedSubjects[`${key}-${index}`] || ""}
-                                                        name={key}
-                                                        id={index}
-                                                        disabled={disabled}
-                                                        onChange={(e) => handleFormChange(e)}
-                                                    >
-                                                        <option defaultValue>--</option>
-                                                        {subjects.map((subject, index) => (
-                                                            <option key={index} value={subject}>
-                                                                {subject}
-                                                            </option>
-                                                        ))}
-                                                    </select>
 
                                                     <select
                                                         className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
@@ -353,6 +337,25 @@ const AdminSetTimeSchedule = () => {
                                                             </option>
                                                         ))}
                                                     </select>
+
+                                                    <select
+                                                        className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
+                                                        // value={day}
+                                                        value={selectedSubjects[`${key}-${index}`] || ""}
+                                                        name={key}
+                                                        id={index}
+                                                        disabled={disabled}
+                                                        onChange={(e) => handleFormChange(e)}
+                                                    >
+                                                        <option defaultValue>--</option>
+                                                        {subjects.map((subject, index) => (
+                                                            <option key={index} value={subject}>
+                                                                {subject}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+
+                                                    
 
                                                     <select
                                                         className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
