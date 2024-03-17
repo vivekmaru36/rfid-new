@@ -17,11 +17,13 @@ function AddCredit({ credit,onClose }) {
     const { user } = useContext(UserContext);
 
     const creditChange = (e) => {
+        e.preventDefault();
         setcreditPoint(e.target.value);
       };
     
     
-    const handlePlaceOrder = async () => {
+    const handlePlaceOrder = async (e) => {
+        e.preventDefault();
         try {
         const response = await axios.post('http://localhost:3500/fetchCreditPoint/placeOrder', {
             creditPoint:creditPoint,
