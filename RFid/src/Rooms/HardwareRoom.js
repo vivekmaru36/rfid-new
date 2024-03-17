@@ -9,6 +9,7 @@ const HardwareRoom = () => {
     // Check if the RFID number is 10 digits and send it
     if (rfidNumber.length === 10 && userLocation && userIP) {
       sendRfidNumberWithLocationAndIP(rfidNumber, userLocation, userIP); // Replace with your actual function to send the number
+      console.log(rfidNumber);
       setRfidNumber(''); // Reset the RFID number after sending
     }
   }, [rfidNumber, userLocation, userIP]);
