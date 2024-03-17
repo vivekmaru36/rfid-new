@@ -122,10 +122,11 @@ const AdminRecentRecords = () => {
                                 <tbody>
                                     {filteredRecords.sort((a, b) => new Date(b.currentTime) - new Date(a.currentTime)).map((record, index) => (
                                         <tr key={index} className="year-container">
-                                            <td className="border border-gray-500">{record.details.name}</td>
+                                            {/* <td className="border border-gray-500">{record.details.name}</td> */}
+                                            <td className="border border-gray-500">{record.details?.name}</td>
                                             <td className="border border-gray-500">{record.foundInCollection}</td>
                                             <td className="border border-gray-500">{convertToIST12HourFormatWithDate(record.currentTime)}</td>
-                                            <td className="border border-gray-500">{record.details.rfid}</td>
+                                            <td className="border border-gray-500">{record.details?.rfid}</td>
                                         </tr>
                                     ))}
                                 </tbody>

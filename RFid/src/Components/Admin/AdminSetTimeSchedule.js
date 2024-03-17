@@ -109,6 +109,8 @@ const AdminSetTimeSchedule = () => {
         console.log("Venue : ", selectedVenue)
     };
 
+    const [scheduleYesOrNo, setscheduleYesOrNo] = useState(false);
+
     useEffect(() => {
         const fetchTimeSchedule = async () => {
             try {
@@ -116,19 +118,34 @@ const AdminSetTimeSchedule = () => {
                 const response = await axios.get("time_schedule/" + user._id);
                 // saving record id for updating/deleting record
                 setId(response.data._id);
-                delete response.data.schedule._id;
+
+                const { schedule } = response.data;
+                setscheduleYesOrNo(true);
+
+                setSelectedSubjects(schedule.monday || {});
+                setSelectedTeachers(schedule.monday || {});
+                setSelectedVenue(schedule.monday || {});
+                // delete response.data.schedule._id;
                 setTimeSchedule(response.data.schedule);
             } catch (err) {
                 // incase the record doesn't exist
                 if (err?.response?.status === 404) {
                     setDisabled(false);
+                    // setTimeSchedule({
+                    //     monday: {"--", "--", "--", "--", "--"},
+                    //     tuesday: {"--", "--", "--", "--", "--"},
+                    //     wednesday: {"--", "--", "--", "--", "--"},
+                    //     thursday: {"--", "--", "--", "--", "--"},
+                    //     friday: {"--", "--", "--", "--", "--"},
+                    // });
                     setTimeSchedule({
-                        monday: ["--", "--", "--", "--", "--"],
-                        tuesday: ["--", "--", "--", "--", "--"],
-                        wednesday: ["--", "--", "--", "--", "--"],
-                        thursday: ["--", "--", "--", "--", "--"],
-                        friday: ["--", "--", "--", "--", "--"],
+                        monday: { 0: { teacher: '', subject: '', venue: '' }, 1: { teacher: '', subject: '', venue: '' }, 2: { teacher: '', subject: '', venue: '' }, 3: { teacher: '', subject: '', venue: '' }, 4: { teacher: '', subject: '', venue: '' }, },
+                        tuesday: { 0: { teacher: '', subject: '', venue: '' }, 1: { teacher: '', subject: '', venue: '' }, 2: { teacher: '', subject: '', venue: '' }, 3: { teacher: '', subject: '', venue: '' }, 4: { teacher: '', subject: '', venue: '' }, },
+                        wednesday: { 0: { teacher: '', subject: '', venue: '' }, 1: { teacher: '', subject: '', venue: '' }, 2: { teacher: '', subject: '', venue: '' }, 3: { teacher: '', subject: '', venue: '' }, 4: { teacher: '', subject: '', venue: '' }, },
+                        thursday: { 0: { teacher: '', subject: '', venue: '' }, 1: { teacher: '', subject: '', venue: '' }, 2: { teacher: '', subject: '', venue: '' }, 3: { teacher: '', subject: '', venue: '' }, 4: { teacher: '', subject: '', venue: '' }, },
+                        friday: { 0: { teacher: '', subject: '', venue: '' }, 1: { teacher: '', subject: '', venue: '' }, 2: { teacher: '', subject: '', venue: '' }, 3: { teacher: '', subject: '', venue: '' }, 4: { teacher: '', subject: '', venue: '' }, },
                     });
+
                 } else setError(err);
             }
         };
@@ -139,15 +156,18 @@ const AdminSetTimeSchedule = () => {
         e.preventDefault();
         const data = {
             //TODO change Schema to user.
-            // adminr: user._id,
+            // admin: user._id,
             schedule: combinedDatas,
-            // Week: dateRange, // Include the picked date
+            // Include the picked date
         };
         try {
             // adding a new time schedule record
-            const response = await axios.post("time_schedule/add",{
-                admin :user._id,
-                data:data
+            const response = await axios.post("time_schedule/add", {
+                admin: user._id,
+                // admin :"snjnsn",
+                data: data,
+                Week: dateRange,
+                Year: currentYear
             });
             toast.success(response.data.message);
         } catch (err) {
@@ -249,7 +269,7 @@ const AdminSetTimeSchedule = () => {
 
     const dateRange = mondaysAndFridays.length > 0 ? `${mondaysAndFridays[0].monday} - ${mondaysAndFridays[0].friday}` : 'No data available';
 
-    // console.log(typeof dateRange);
+    console.log(dateRange);
 
     const [combinedDatas, setCombinedData] = useState();
 
@@ -257,7 +277,7 @@ const AdminSetTimeSchedule = () => {
         const combinedData = {};
 
         // Iterate over the selected subjects, teachers, and venues
-        Object.keys(selectedSubjects).forEach(key => {
+        Object.keys(selectedTeachers).forEach(key => {
             // Extract the day and index from the key
             const [dayIndex, timeIndex] = key.split('-');
 
@@ -287,150 +307,291 @@ const AdminSetTimeSchedule = () => {
 
     }, [selectedSubjects, selectedTeachers, selectedVenue]);
 
-    
+    console.log(timeSchedule)
 
 
-
-    return (
-        <main className="time_schedule">
-            <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
-                Time Schedule For First Year
-            </h2>
-            <form>
-                {timeSchedule.monday ? (
-                    <div className="my-4 w-full overflow-auto rounded-md border-2 border-slate-900 dark:border-slate-500 dark:p-[1px]">
-                        <table className=" w-full text-center">
-                            <TableHeader
-                                AdditionalHeaderClasses={"h-[3rem]"}
-                                Headers={["Day/Hour", "8:00-8:40", "9:00-9:40", "10:00 - 10:40", "11:00 - 11:40", "12:00 - 12:40"]}
-                            />
-                            <tbody>
-                                {Object.entries(timeSchedule)?.map(([key, value]) => {
-                                    return (
-                                        <tr key={key}>
+    if (scheduleYesOrNo) {
+        return (
+            <main className="time_schedule">
+                <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
+                    First Year Bsc CS
+                </h2>
+                <form>
+                    {timeSchedule.monday ? (
+                        <div className="my-4 w-full overflow-auto rounded-md border-2 border-slate-900 dark:border-slate-500 dark:p-[1px]">
+                            <table className=" w-full text-center">
+                                <TableHeader
+                                    AdditionalHeaderClasses={"h-[3rem]"}
+                                    Headers={["Day/Hour", "8:00-8:40", "9:00-9:40", "10:00 - 10:40", "11:00 - 11:40", "12:00 - 12:40"]}
+                                />
+                                <tbody>
+                                    {Object.entries(timeSchedule)?.map(([day, schedule]) => (
+                                        <tr key={day}>
                                             <th className="border-none bg-slate-900 px-4 py-4 text-base capitalize text-slate-100">
-                                                {key}
+                                                {day}
                                             </th>
-                                            {value.map((day, index) => (
-                                                <td
-                                                    className="min-w-[180px] border-l-[1px]  border-t-[1px] border-slate-400 p-1 first:border-none"
-                                                    id="table__td"
-                                                    key={index}
-                                                >
-                                                    <select
-                                                        className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
-                                                        // value={day}
-                                                        value={selectedSubjects[`${key}-${index}`] || ""}
-                                                        name={key}
-                                                        id={index}
-                                                        disabled={disabled}
-                                                        onChange={(e) => handleFormChange(e)}
+                                            {Array.from({ length: 5 }, (_, index) => index).map((hour) => {
+                                                const scheduleEntry = schedule[hour.toString()];
+                                                return (
+                                                    <td
+                                                        className="min-w-[180px] border-l-[1px] border-t-[1px] border-slate-400 p-1 first:border-none"
+                                                        key={hour}
                                                     >
-                                                        <option defaultValue>--</option>
-                                                        {subjects.map((subject, index) => (
-                                                            <option key={index} value={subject}>
-                                                                {subject}
-                                                            </option>
-                                                        ))}
-                                                    </select>
+                                                        <select
+                                                            className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
+                                                            value={scheduleEntry?.teacher || ""}
+                                                            name={day}
+                                                            id={hour}
+                                                            disabled={disabled}
+                                                            onChange={(e) => handleTeacher(e)}
+                                                        >
+                                                            <option defaultValue>Assign Teacher</option>
+                                                            {Teachers.filter((teacher) => teacher.Year === '1st').map((teacher) => (
+                                                                <option key={teacher._id} value={teacher.name}>
+                                                                    {teacher.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
 
-                                                    <select
-                                                        className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
-                                                        // value={day}
-                                                        value={selectedTeachers[`${key}-${index}`] || ""}
-                                                        name={key}
-                                                        id={index}
-                                                        // id={${key}-${index}-teacher}
-                                                        disabled={disabled}
-                                                        onChange={(e) => handleTeacher(e)
-                                                            // onChange={(e) => handleFormChange(e)
-                                                        }
-                                                    >
-                                                        <option defaultValue>Assign Teacher</option>
-                                                        {Teachers.filter(teacher => teacher.Year === '1st').map((teacher) => (
-                                                            <option key={teacher._id} value={teacher.name}>
-                                                                {teacher.name}
-                                                            </option>
-                                                        ))}
-                                                    </select>
+                                                        <select
+                                                            className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
+                                                            value={scheduleEntry?.subject || ""}
+                                                            name={day}
+                                                            id={hour}
+                                                            disabled={disabled}
+                                                            onChange={(e) => handleFormChange(e)}
+                                                        >
+                                                            <option defaultValue>--</option>
+                                                            {subjects.map((subject, index) => (
+                                                                <option key={index} value={subject}>
+                                                                    {subject}
+                                                                </option>
+                                                            ))}
+                                                        </select>
 
-                                                    <select
-                                                        className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
-                                                        // value={day}
-                                                        value={selectedVenue[`${key}-${index}`] || ""}
-                                                        name={key}
-                                                        id={index}
-                                                        // id={${key}-${index}-teacher}
-                                                        disabled={disabled}
-                                                        onChange={(e) => handleVenue(e)
-                                                            // onChange={(e) => handleFormChange(e)
-                                                        }
-                                                    >
-                                                        <option defaultValue>Select Venue</option>
-                                                        {Venue.map((venue, index) => (
-                                                            <option key={index} value={venue}>
-                                                                {venue}
-                                                            </option>
-                                                        ))}
-
-                                                    </select>
-                                                </td>
-                                            ))}
+                                                        <select
+                                                            className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
+                                                            value={scheduleEntry?.venue || ""}
+                                                            name={day}
+                                                            id={hour}
+                                                            disabled={disabled}
+                                                            onChange={(e) => handleVenue(e)}
+                                                        >
+                                                            <option defaultValue>Select Venue</option>
+                                                            {Venue.map((venue, index) => (
+                                                                <option key={index} value={venue}>
+                                                                    {venue}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </td>
+                                                );
+                                            })}
                                         </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                        <br />
-                        <br />
-                        <div className="mb-4">
+                                    ))}
 
-                            <label className="block font-bold" htmlFor="name">Week : </label>
-                            <p>{mondaysAndFridays.length > 0 ? `${mondaysAndFridays[0].monday} - ${mondaysAndFridays[0].friday}` : 'No data available'}</p>
-                            {/* <DatePicker
-                                selected={startDate}
-                                onChange={(date) => setStartDate(date)}
-                                minDate={new Date()}
-                                maxDate={addDays(new Date(), 3)}
-                                className="border border-gray-300 rounded px-4 py-2"
-                            /> */}
+                                </tbody>
+                            </table>
+                            <br />
+                            <br />
+                            <div className="mb-4">
+
+                                <label className="block font-bold" htmlFor="name">Week : </label>
+                                {/* <p>{mondaysAndFridays.length > 0 ? `${mondaysAndFridays[0].monday} - ${mondaysAndFridays[0].friday}` : 'No data available'}</p> */}
+                                <p>{dateRange}</p>
+                                {/* <DatePicker
+                                    selected={startDate}
+                                    onChange={(date) => setStartDate(date)}
+                                    minDate={new Date()}
+                                    maxDate={addDays(new Date(), 3)}
+                                    className="border border-gray-300 rounded px-4 py-2"
+                                /> */}
+                            </div>
                         </div>
-                    </div>
-                ) : (
-                    <Loading />
-                )}
+                    ) : (
+                        <Loading />
+                    )}
 
-                {timeSchedule.monday && disabled && (
-                    <div className="flex gap-4">
+                    {timeSchedule.monday && disabled && (
+                        <div className="flex gap-4">
+                            <button
+                                type="submit"
+                                className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900"
+                                onClick={() => setDisabled(false)}
+                            >
+                                <FaEdit /> Edit
+                            </button>
+                            <button
+                                type="submit"
+                                className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-red-700 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-red-700"
+                                onClick={(e) => deleteTimeSchedule(e)}
+                            >
+                                <FaTrash /> Delete
+                            </button>
+                        </div>
+                    )}
+                    {!disabled && (
                         <button
                             type="submit"
                             className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900"
-                            onClick={() => setDisabled(false)}
+                            onClick={(e) => addTimeSchedule(e)}
                         >
-                            <FaEdit /> Edit
+                            <FaPlus /> Save
                         </button>
+                    )}
+                </form>
+                {error ? <ErrorStrip error={error} /> : ""}
+            </main>
+        );
+    } else {
+        return (
+            <main className="time_schedule">
+                <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
+                    First Year Bsc CS
+                </h2>
+                <form>
+                    {timeSchedule.monday ? (
+                        <div className="my-4 w-full overflow-auto rounded-md border-2 border-slate-900 dark:border-slate-500 dark:p-[1px]">
+                            <table className=" w-full text-center">
+                                <TableHeader
+                                    AdditionalHeaderClasses={"h-[3rem]"}
+                                    Headers={["Day/Hour", "8:00-8:40", "9:00-9:40", "10:00 - 10:40", "11:00 - 11:40", "12:00 - 12:40"]}
+                                />
+                                <tbody>
+                                    {Object.entries(timeSchedule)?.map(([key, value]) => {
+                                        return (
+                                            <tr key={key}>
+                                                <th className="border-none bg-slate-900 px-4 py-4 text-base capitalize text-slate-100">
+                                                    {key} s
+                                                </th>
+                                                {/* {value.map((day, index) => ( */}
+                                                {Object.entries(value)?.map(([index, value]) => (
+                                                    <td
+                                                        className="min-w-[180px] border-l-[1px]  border-t-[1px] border-slate-400 p-1 first:border-none"
+                                                        id="table__td"
+                                                        key={index}
+                                                    >
+
+                                                        <select
+                                                            className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
+                                                            // value={day}
+                                                            value={selectedTeachers[`${key}-${index}`] || ""}
+                                                            // value={timeSchedule.monday[0].teacher}
+                                                            name={key}
+                                                            id={index}
+                                                            // id={${key}-${index}-teacher}
+                                                            disabled={disabled}
+                                                            onChange={(e) => handleTeacher(e)
+                                                                // onChange={(e) => handleFormChange(e)
+                                                            }
+                                                        >
+                                                            <option defaultValue>Assign Teacher</option>
+                                                            {Teachers.filter(teacher => teacher.Year === '1st').map((teacher) => (
+                                                                <option key={teacher._id} value={teacher.name}>
+                                                                    {teacher.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+
+                                                        <select
+                                                            className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
+                                                            // value={day}
+                                                            value={selectedSubjects[`${key}-${index}`] || ""}
+                                                            name={key}
+                                                            id={index}
+                                                            disabled={disabled}
+                                                            onChange={(e) => handleFormChange(e)}
+                                                        >
+                                                            <option defaultValue>--</option>
+                                                            {subjects.map((subject, index) => (
+                                                                <option key={index} value={subject}>
+                                                                    {subject}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+
+
+
+                                                        <select
+                                                            className="select-img h-[3rem] w-full appearance-none text-center leading-6 focus:border-0 disabled:opacity-100"
+                                                            // value={day}
+                                                            value={selectedVenue[`${key}-${index}`] || ""}
+                                                            name={key}
+                                                            id={index}
+                                                            // id={${key}-${index}-teacher}
+                                                            disabled={disabled}
+                                                            onChange={(e) => handleVenue(e)
+                                                                // onChange={(e) => handleFormChange(e)
+                                                            }
+                                                        >
+                                                            <option defaultValue>Select Venue</option>
+                                                            {Venue.map((venue, index) => (
+                                                                <option key={index} value={venue}>
+                                                                    {venue}
+                                                                </option>
+                                                            ))}
+
+                                                        </select>
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                            <br />
+                            <br />
+                            <div className="mb-4">
+
+                                <label className="block font-bold" htmlFor="name">Week : </label>
+                                {/* <p>{mondaysAndFridays.length > 0 ? `${mondaysAndFridays[0].monday} - ${mondaysAndFridays[0].friday}` : 'No data available'}</p> */}
+                                <p>{dateRange}</p>
+                                {/* <DatePicker
+                                    selected={startDate}
+                                    onChange={(date) => setStartDate(date)}
+                                    minDate={new Date()}
+                                    maxDate={addDays(new Date(), 3)}
+                                    className="border border-gray-300 rounded px-4 py-2"
+                                /> */}
+                            </div>
+                        </div>
+                    ) : (
+                        <Loading />
+                    )}
+
+                    {timeSchedule.monday && disabled && (
+                        <div className="flex gap-4">
+                            <button
+                                type="submit"
+                                className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900"
+                                onClick={() => setDisabled(false)}
+                            >
+                                <FaEdit /> Edit
+                            </button>
+                            <button
+                                type="submit"
+                                className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-red-700 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-red-700"
+                                onClick={(e) => deleteTimeSchedule(e)}
+                            >
+                                <FaTrash /> Delete
+                            </button>
+                        </div>
+                    )}
+                    {!disabled && (
                         <button
                             type="submit"
-                            className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-red-700 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-red-700"
-                            onClick={(e) => deleteTimeSchedule(e)}
+                            className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900"
+                            onClick={(e) => addTimeSchedule(e)}
                         >
-                            <FaTrash /> Delete
+                            <FaPlus /> Save
                         </button>
-                    </div>
-                )}
-                {!disabled && (
-                    <button
-                        type="submit"
-                        className="mb-4 flex h-10 w-auto items-center gap-2 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 px-6 py-2 font-semibold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 dark:border-violet-300 dark:bg-violet-900 dark:text-violet-100 dark:hover:bg-slate-900"
-                        onClick={(e) => addTimeSchedule(e)}
-                    >
-                        <FaPlus /> Save
-                    </button>
-                )}
-            </form>
-            {error ? <ErrorStrip error={error} /> : ""}
-        </main>
-    );
+                    )}
+                </form>
+                {error ? <ErrorStrip error={error} /> : ""}
+            </main>
+        );
+    }
+
 };
 
 export default AdminSetTimeSchedule;
