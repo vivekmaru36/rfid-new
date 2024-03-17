@@ -57,12 +57,11 @@ function AddCredit({ credit,onClose }) {
                 </div>
                 <div className='bg-opacity-40 rounded-xl px-5 py-5 flex flex-col gap-8 items-center addMoneydiv'>
                 <form className='flex flex-col justify-center items-center gap-3' onSubmit={handlePlaceOrder}>
-                    <label className='text-3xl font-extrabold'>Add Credit Point</label>
-                    <span>Credit balance : {credit}</span>
+                    <label className='text-3xl font-extrabold'>Redeem The Credit Point To Your wallet</label>
                     <div className='flex flex-row'>
                         <input
                             type='number'
-                            style={{color:"white"}}
+                            style={{color:"white",border:"1px solid white",marginTop:"50px;"}}
                             value={creditPoint}
                             placeholder='Enter Credit Amount'
                             required
@@ -71,7 +70,13 @@ function AddCredit({ credit,onClose }) {
                         />
                     </div>
                     <button className='bg-white px-4 py-2 rounded-lg text-black'>Redeem Credit</button>
+                    <span style={{marginTop: "10px", }}>Credit balance: {credit}</span>
+                    <span style={{fontFamily: "Arial, sans-serif"}}>Enter the points you want to transfer to your wallet!</span>
+                    <span style={{fontFamily: "Arial, sans-serif"}}>By transferring the credit points to the wallet, </span>
+                    <span style={{fontFamily: "Arial, sans-serif"}}>they can be used for various purposes, such as payments at the canteen.</span>
+
                 </form>
+                
                 </div>
             </div>
         </div>

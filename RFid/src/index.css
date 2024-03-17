@@ -239,10 +239,18 @@
     padding: 5px;
   }
   
+
   table.table-transactions thead {
     background-color: #F854B1;
   }
   
+
+  .credit-balance{
+    position:absolute;
+    top:55%;
+    left:10%;
+    font-size: 26px;
+  }
 
 
 

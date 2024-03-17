@@ -89,10 +89,8 @@ function Wallet() {
         
             <div className="wallet drop-shadow-md md:drop-shadow-3xl">
                 <img src={walletImg} className="walletimg" alt="wallet_image"/>
-                <h2>Wallet Balance</h2>
-                <div className="wallet-balance"> 
-                    Rs.{wallet}
-                </div>
+                <h2>Wallet Balance Rs.{wallet}</h2>
+        
                 <div className="credit-balance">
                     <span>Credit balance : {creditPoint}</span>
                 </div>
