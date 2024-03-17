@@ -70,7 +70,7 @@ function AddCredit({ credit,onClose }) {
                             onChange={creditChange}
                         />
                     </div>
-                    <button className='bg-white px-4 py-2 rounded-lg text-black'>Add Money</button>
+                    <button className='bg-white px-4 py-2 rounded-lg text-black'>Redeem Credit</button>
                 </form>
                 </div>
             </div>

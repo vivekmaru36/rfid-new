@@ -108,7 +108,7 @@ function Wallet() {
                 {showProductModal && <AddProduct onClose={() => setProductModal(false)}/>}
 
                 {/* add credit point in the wallet */}
-                <button onClick={() => setCreditModal(true)} className="vvd sign-in order-item" style={{ height: "40px", padding: "6px 20px 20px 20px", background: "white", marginLeft: "30px", marginTop: "5px", borderRadius: "3px" }}><span>Add Credit</span></button>
+                <button onClick={() => setCreditModal(true)} className="vvd sign-in order-item" style={{ height: "40px", padding: "6px 20px 20px 20px", background: "white", marginLeft: "30px", marginTop: "5px", borderRadius: "3px" }}><span>Redeem Credit</span></button>
                 {showCreditModal && <AddCredit credit={creditPoint} onClose={() => setCreditModal(false)}/>}
                 
             </div>
