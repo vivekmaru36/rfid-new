@@ -7,7 +7,7 @@ import { HiOutlineDocumentReport } from "react-icons/hi";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { BiBookAdd } from "react-icons/bi";
 import { RiUserAddLine } from "react-icons/ri";
-import { PiStudent, PiUser, PiBooks } from "react-icons/pi";
+import { PiStudent, PiUser, PiBooks,PiWalletBold } from "react-icons/pi";
 import { FaHistory, FaUsers } from "react-icons/fa";
 import { FaUsersBetweenLines, FaUsersLine } from "react-icons/fa6";
 
@@ -108,6 +108,12 @@ const Nav = () => {
             <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
               <FaHistory className="pt-[0.1rem] text-2xl  " />
               Recent Records
+            </li>
+          </NavLink>
+          <NavLink to={"./wallet"} className="w-full font-medium">
+            <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
+              <PiWalletBold className="pt-[0.1rem] text-2xl  " />
+              Transactions
             </li>
           </NavLink>
         </ul>

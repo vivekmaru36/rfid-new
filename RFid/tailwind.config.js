@@ -44,6 +44,14 @@ module.exports = {
         fadeInFast: "fadeIn 0.5s ease-out 1",
         circle: "circle 5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
+
+      dropShadow: {
+        '3xl': '0 35px 35px rgba(0, 0, 0, 0.25)',
+        '4xl': [
+          '0 35px 35px rgba(0, 0, 0, 0.25)',
+          '0 45px 65px rgba(0, 0, 0, 0.15)'
+        ]
+      }
     },
   },
   plugins: [],

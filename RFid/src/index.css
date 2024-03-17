@@ -143,4 +143,114 @@
   .delete-button:hover {
     background-color: #cc4c39;
   }
+
+  .wallet{
+    background: #6441A5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2a0845, #6441A5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2a0845, #6441A5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 40%;
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 12px;
+
+    box-shadow: 4.0px 8.0px 8.0px rgba(0,0,0,0.38);
+    color: white;
+    font-family: Courier New, monospace;
+    line-height: 1.5rem;
+    letter-spacing: 0.1em;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .wallet h2{
+ 
+    position: absolute;
+    top:30%;
+    left:10%;
+
+  }
+
+  .wallet-balance{
+    position:absolute;
+    top:50%;
+    left:15%;
+  }
+
+  .walletimg{
+   position:absolute;
+   right:10%;
+   width:15%;
+   top:15%; 
+
+  }
+
+  .walletNavigation{
+    position: relative;
+    background-color: white;
+    width:12%;
+    height: 8%;
+    font-size: 20px;
+    border: 1px solid transparent;
+    left:30%;
+    margin-top:2%;
+    margin-bottom: 3%;
+    border-radius: 7px;
+    color:black;
+    font-weight:bold;
+  }
+
+  .credit-balance{
+    position:absolute
+  }
+
+
+  
+  .addMoneydiv{
+    background:#1b1b1b;
+    width:800px;
+    font-family: Courier New, monospace;
+    color: white;
+  }
+  .addMoneydiv input{
+    color:white;
+    font-weight: bold;
+    
+  }
+
+
+  table.table-transactions {
+    margin:20px;
+    width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #A5A5A5;
+    border-style: solid;
+    box-shadow: 4.0px 8.0px 8.0px rgba(0,0,0,0.38);
+    color:white;
+    border-radius: 10px;
+  }
+  
+  table.table-transactions td, table.table-transactions th {
+    border-width: 7px;
+    border-color: #A5A5A5;
+    border-style: solid;
+    padding: 5px;
+  }
+  
+  table.table-transactions thead {
+    background-color: #F854B1;
+  }
+  
+
+
+
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+  
 }

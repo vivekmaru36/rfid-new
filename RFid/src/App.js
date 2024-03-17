@@ -51,9 +51,10 @@ import AdminViewTeacher from "./Components/Admin/AdminViewTeacher";
 import AdminAssignLectures from "./Components/Admin/AdminAssignLectures";
 import AdminSetTimeSchedule from "./Components/Admin/AdminSetTimeSchedule";
 import AdminRecentRecords from "./Components/Admin/AdminRecentRecords";
-
-
-
+import Wallet from "./Components/Queries/wallet";
+import SucessLayout from "./Components/Layouts/succesLayout";
+import CheckoutLayout from "./Components/Layouts/checkoutLayout";
+import ErrorTransactionLayout from "./Components/Layouts/errorTransactionLayout";
 
 function App() {
   const router = createBrowserRouter(
@@ -80,12 +81,20 @@ function App() {
         {/* Route for Auditorium */}
         <Route path="Auditorium" element={<Auditorium/>} />
         
+        {/* Route for payment Sucess1 after adding amount in wallet*/}
+        <Route path="/success/:userId/:rfid/:money" element={<SucessLayout/>}/>
+        <Route path="/checkout/:transactionId/:amount" element={<CheckoutLayout/>}/>
+        <Route path="/dash/cancel" element={<ErrorTransactionLayout/>}/>
+
+
+
         <Route
           path="/dash"
           element={<Layout />}
           errorElement={<ErrorElement />}
         >
           <Route index element={<Dash />} />
+          <Route path="wallet" element={<Wallet/>}/>
           
           <Route path="otp" element={< Otp/>} />
           
@@ -109,6 +118,8 @@ function App() {
           <Route path="AssignLec" element={<AdminAssignLectures />} />
           <Route path="SetTimeSchedule" element={<AdminSetTimeSchedule />} />
           <Route path="RecentRecordsAdmin" element={<AdminRecentRecords />} />
+
+
         </Route>
       </Route>
     )

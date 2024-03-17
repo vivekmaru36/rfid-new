@@ -5,7 +5,7 @@ import { HiOutlineDocumentReport } from "react-icons/hi";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { BiBookAdd } from "react-icons/bi";
 import { RiUserAddLine } from "react-icons/ri";
-import { PiBooks, PiUser, PiStudent, PiStudentThin } from "react-icons/pi";
+import { PiBooks, PiUser, PiStudent, PiStudentThin,PiWalletBold  } from "react-icons/pi";
 import { useContext, useEffect } from "react";
 import UserContext from "../../Hooks/UserContext";
 import axios from "../../config/api/axios";
@@ -194,6 +194,19 @@ const Dash = () => {
             Profile
             <p className="text-sm font-normal lg:text-base ">
               View or Edit Profile
+            </p>
+          </div>
+        </Link>
+        
+        <Link
+          className="flex gap-2 rounded-lg bg-violet-100 p-6 text-base hover:bg-violet-950 hover:text-slate-100 dark:bg-violet-950/40 lg:text-lg"
+          to={"./wallet"}
+          >
+          <PiWalletBold className="text-[2.5rem] lg:text-[4rem] " />
+          <div className="font-semibold">
+            Wallet
+            <p className="text-sm font-normal lg:text-base ">
+              Transactions
             </p>
           </div>
         </Link>

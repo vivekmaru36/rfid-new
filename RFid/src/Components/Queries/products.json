@@ -1,0 +1,63 @@
+[
+    {
+      "name": "Samosa",
+      "price": 10,
+      "quantity": 0,
+      "category": "Savory Snacks"
+    },
+    {
+      "name": "Pakora",
+      "price": 15,
+      "quantity": 0,
+      "category": "Savory Snacks"
+    },
+    {
+      "name": "Bhel Puri",
+      "price": 20,
+      "quantity": 0,
+      "category": "Street Food"
+    },
+    {
+      "name": "Pani Puri",
+      "price": 15,
+      "quantity": 0,
+      "category": "Street Food"
+    },
+    {
+      "name": "Dahi Vada",
+      "price": 25,
+      "quantity": 0,
+      "category": "Street Food"
+    },
+    {
+      "name": "Kachori",
+      "price": 20,
+      "quantity": 0,
+      "category": "Savory Snacks"
+    },
+    {
+      "name": "Chaat",
+      "price": 30,
+      "quantity": 0,
+      "category": "Street Food"
+    },
+    {
+      "name": "Aloo Tikki",
+      "price": 20,
+      "quantity": 0,
+      "category": "Street Food"
+    },
+    {
+      "name": "Paneer Pakora",
+      "price": 35,
+      "quantity": 0,
+      "category": "Savory Snacks"
+    },
+    {
+      "name": "Idli",
+      "price": 15,
+      "quantity": 0,
+      "category": "South Indian"
+    }
+]
+  
