@@ -4,7 +4,6 @@ import Loading from "../Layouts/Loading";
 import axios from "../../config/api/axios";
 import walletImg from './wallet.png';
 import AddMoney from "./addMoney";
-import TransactionData from "../Layouts/transactionLayout";
 import AddProduct from "./addProduct";
 function Wallet() {
     const { user } = useContext(UserContext);
