@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect } from "react";
-import UserContext from "../../Hooks/UserContext";
 import Loading from "../Layouts/Loading";
 import axios from "../../config/api/axios";
 import { useParams } from "react-router-dom";
@@ -10,9 +9,8 @@ function SucessLayout() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const { user } = useContext(UserContext);
 
-    const {userId,rfid,money} = useParams();
+    const {userId,rfid,email,money} = useParams();
     const fetchWallet = async () => {
         console.log("Fetching wallet...");
         setLoading(true);
@@ -23,7 +21,7 @@ function SucessLayout() {
         console.log(money);
     
         try {
-            const response = await axios.post('http://localhost:3500/addMoney/sucess', {userId:userId,rfid:rfid,money:money,email:user.email});
+            const response = await axios.post('http://localhost:3500/addMoney/sucess', {userId:userId,rfid:rfid,money:money,email:email});
 
             if (response.data.success){
                 navigate("/dash/wallet");

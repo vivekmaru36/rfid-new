@@ -82,7 +82,7 @@ function App() {
         <Route path="Auditorium" element={<Auditorium/>} />
         
         {/* Route for payment Sucess1 after adding amount in wallet*/}
-        <Route path="/success/:userId/:rfid/:money" element={<SucessLayout/>}/>
+        <Route path="/success/:userId/:rfid/:email/:money" element={<SucessLayout/>}/>
         <Route path="/checkout/:transactionId/:amount" element={<CheckoutLayout/>}/>
         <Route path="/dash/cancel" element={<ErrorTransactionLayout/>}/>
 
